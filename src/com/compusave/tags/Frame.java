@@ -26,62 +26,114 @@ public class Frame implements WindowListener {
         System.out.println("point 1");
         BuildFrame();
     }
+
     //Building the JFrame structure.
+
+    private static JTextField Model;
+    private static JTextField CPU;
+    private static JTextField Mem;
+    private static JTextField OS;
+    private static JTextField GPU;
+
     private static void BuildFrame(){
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        JTextField CPU = new JTextField("CPU");
-        CPU.setToolTipText("CPU");
-        panel.add(CPU);
+        Model = new JTextField("Model");
+        Model.setToolTipText("System Model");
+        panel.add(Model);
+        Model.setVisible(true);
 
-        JTextField Mem = new JTextField("Memory");
+        OS = new JTextField("Operating System");
+        OS.setToolTipText("Operating System");
+        panel.add(OS);
+        OS.setVisible(true);
+
+        CPU = new JTextField("CPU");
+        CPU.setToolTipText("CPU");
+        CPU.setSize(500,10);
+        panel.add(CPU);
+        CPU.setVisible(true);
+
+        Mem = new JTextField("Memory");
         Mem.setToolTipText("Memory");
         panel.add(Mem);
+        Mem.setVisible(true);
+
+        GPU = new JTextField("GPU");
+        GPU.setToolTipText("GPU");
+        panel.add(GPU);
+        GPU.setVisible(true);
 
         System.out.println("point 2");
         frame.setVisible(true);
         System.out.println("point 3");
     }
 
+    public static void updateFrame(String os, String cpu, int mem, String gpu){
+        try {
+            if (os != null) {
+                OS.setText(os);
+            }else{
+                throw new NullPointerException("Unable to load OS declaration to frame");
+            }
+            if (cpu != null) {
+                CPU.setText(cpu);
+            }else{
+                throw new NullPointerException("Unable to load CPU name to frame");
+            }
+            if (Integer.toString(mem) != null) {
+                Mem.setText(Integer.toString(mem));
+            }else{
+                throw new NullPointerException("Unable to load Memory info to frame");
+            }
+            if (gpu != null) {
+                GPU.setText(gpu);
+            }else{
+                throw new NullPointerException("Unable to load GPU name to frame");
+            }
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+    }
     //Not Used
     @Override
-    public void windowOpened(WindowEvent e) {
+    public void windowOpened(WindowEvent e) {}
 
-    }
 
+    /*
+     Class is used to properly handle the JFrame closing event
+     and shut down any open files and run some finishing commands.
+
+     @see WindowListener
+     @see Main.Stop()
+    */
     @Override
     public void windowClosing(WindowEvent e) {
         Main.Stop();
     }
 
-    //Not Used
+    /*
+    This class is function is overrides the window closed event
+    in the WindowListener class that is imported.
+    @see WindowListener
+     */
     @Override
-    public void windowClosed(WindowEvent e) {
-
-    }
-
-    //Not Used
-    @Override
-    public void windowIconified(WindowEvent e) {
-
-    }
+    public void windowClosed(WindowEvent e) {}
 
     //Not Used
     @Override
-    public void windowDeiconified(WindowEvent e) {
-
-    }
+    public void windowIconified(WindowEvent e) {}
 
     //Not Used
     @Override
-    public void windowActivated(WindowEvent e) {
-
-    }
+    public void windowDeiconified(WindowEvent e) {}
 
     //Not Used
     @Override
-    public void windowDeactivated(WindowEvent e) {
+    public void windowActivated(WindowEvent e) {}
 
-    }
+    //Not Used
+    @Override
+    public void windowDeactivated(WindowEvent e) {}
 }
