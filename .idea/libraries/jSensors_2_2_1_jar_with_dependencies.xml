@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jSensors-2.2.1-jar-with-dependencies">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Libs/jSensors-2.2.1-jar-with-dependencies.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

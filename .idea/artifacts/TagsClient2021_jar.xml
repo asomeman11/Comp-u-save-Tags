@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TagsClient2021:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TagsClient2021_jar</output-path>
+    <root id="archive" name="TagsClient2021.jar">
+      <element id="module-output" name="TagsClient2021" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Libs/jHardware-0.8.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Libs/jSensors-2.2.1-jar-with-dependencies.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

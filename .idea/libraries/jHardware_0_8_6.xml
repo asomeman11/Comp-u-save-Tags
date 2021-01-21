@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jHardware-0.8.6">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Libs/jHardware-0.8.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
