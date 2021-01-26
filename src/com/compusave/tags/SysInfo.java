@@ -29,8 +29,8 @@ public class SysInfo {
     public static String getOS() {return OS;}
     private static String CPU;
     public static String getCPU() {return CPU;}
-    private static final int Memory = (int)Runtime.getRuntime().maxMemory();
-    public static int getMemory(){return Memory;}
+    private static final float Memory = Runtime.getRuntime().maxMemory();
+    public static float getMemory(){return Memory;}
     private static String GPU;
     public static String getGPU(){return GPU;}
 
@@ -38,8 +38,9 @@ public class SysInfo {
 
 
     public static void GetSysInfo(){
+        int mb = 1024 * 1024;
 
-        System.out.println(getMemory());
+        System.out.println(getMemory() / mb);
         System.out.println(getOS());
         /*
         Getting CPU information and setting it to a global variable.

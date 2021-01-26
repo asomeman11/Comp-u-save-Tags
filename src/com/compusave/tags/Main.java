@@ -9,7 +9,7 @@ public class Main {
        System.out.println("test");
        System.out.println("Retrieving System Info");
        GetSysInfo();
-       Frame.updateFrame(getOS(), getCPU(), getMemory(), getGPU());
+       Frame.updateFrame(getOS(), getCPU(), 0, getGPU());
 
     }
 
