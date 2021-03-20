@@ -80,6 +80,7 @@ public class SysInfo {
                 }
             }
         } catch (InvalidGPUException e) {
+            System.out.println("Unable to determine GPU. Please manually add it to the tag.");
             e.printStackTrace();
         }
 
