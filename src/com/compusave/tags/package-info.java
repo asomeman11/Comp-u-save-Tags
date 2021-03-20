@@ -1,6 +1,11 @@
 package com.compusave.tags;
 
+/*
+TODO ADD USB-C
+TODO ADD M.2
+TODO Maybe RGB
 
+ */
 
 /*
 This is the Main package for the Comp-U-Save Ltd. Tags Client Java 2021 Edition.

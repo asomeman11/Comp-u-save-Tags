@@ -5,6 +5,14 @@ import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+/*
+TODO Add more text fields for the system specs.
+TODO Create submit button.
+TODO Make submit button do something.
+TODO Adjust text field Sizes.
+TODO Fix Memory readings.
+ */
+@SuppressWarnings("all")
 public class Frame implements WindowListener {
 
     public static JFrame frame;
@@ -21,7 +29,7 @@ public class Frame implements WindowListener {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 
-        panel = new JPanel();
+        panel = new JPanel(null);
         frame.add(panel);
         System.out.println("point 1");
         BuildFrame();
@@ -36,34 +44,63 @@ public class Frame implements WindowListener {
     private static JTextField GPU;
 
     private static void BuildFrame(){
-        panel.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
+
+
+        //-----------------Model--------------------
+        final JLabel ModelL = new JLabel("Model");
+        ModelL.setPreferredSize(new Dimension(50,20));
+        ModelL.setBounds(15,10,50,20);
+        ModelL.setVisible(true);
+        panel.add(ModelL);
 
         Model = new JTextField("Model");
         Model.setToolTipText("System Model");
+        Model.setPreferredSize(new Dimension(300,20));
+        Model.setBounds(70,10,310,25);
         panel.add(Model);
         Model.setVisible(true);
 
-        OS = new JTextField("Operating System");
-        OS.setToolTipText("Operating System");
-        panel.add(OS);
-        OS.setVisible(true);
+
+        //-----------------CPU--------------------
+        final JLabel CPUL = new JLabel("CPU");
+        CPUL.setPreferredSize(new Dimension(50,20));
+        CPUL.setBounds(15,40,50,20);
+        panel.add(CPUL);
 
         CPU = new JTextField("CPU");
         CPU.setToolTipText("CPU");
-        CPU.setSize(500,10);
+        //Set the Size of the textfield.
+        CPU.setPreferredSize(new Dimension(150,20));
+        //Set the location of the text field and the hitbox.
+        CPU.setBounds(70,40,120,25);
         panel.add(CPU);
         CPU.setVisible(true);
 
+        //-----------------Memory-----------------
         Mem = new JTextField("Memory");
         Mem.setToolTipText("Memory");
         panel.add(Mem);
         Mem.setVisible(true);
 
+        //-------------------GPU-----------------
+        final JLabel GPUL = new JLabel("GPU");
+        GPUL.setPreferredSize(new Dimension(50, 20));
+        GPUL.setBounds(15,70,50,20);
+        panel.add(GPUL);
+
         GPU = new JTextField("GPU");
         GPU.setToolTipText("GPU");
+        GPU.setPreferredSize(new Dimension(150,20));
+        GPU.setBounds(70,70,170,25);
         panel.add(GPU);
         GPU.setVisible(true);
+
+        //---------------OS------------------------
+        OS = new JTextField("Operating System");
+        OS.setToolTipText("Operating System");
+        OS.setBounds(70,100,120,25);
+        panel.add(OS);
+        OS.setVisible(true);
 
         System.out.println("point 2");
         frame.setVisible(true);
@@ -119,7 +156,7 @@ public class Frame implements WindowListener {
     @see WindowListener
      */
     @Override
-    public void windowClosed(WindowEvent e) {}
+    public void windowClosed(WindowEvent e) {Main.Stop();}
 
     //Not Used
     @Override
