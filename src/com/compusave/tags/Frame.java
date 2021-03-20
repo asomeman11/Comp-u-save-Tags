@@ -1,5 +1,7 @@
 package com.compusave.tags;
 
+import javafx.scene.control.ComboBox;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
@@ -11,6 +13,7 @@ TODO Create submit button.
 TODO Make submit button do something.
 TODO Adjust text field Sizes.
 TODO Fix Memory readings.
+TODO Get Mac SN
  */
 @SuppressWarnings("all")
 public class Frame implements WindowListener {
@@ -42,6 +45,9 @@ public class Frame implements WindowListener {
     private static JTextField Mem;
     private static JTextField OS;
     private static JTextField GPU;
+    private static JTextField DriveSize;
+    private static ComboBox DriveType;
+    private static final String[] DriveTypes = {"HDD", "SSD", "M.2"};
 
     private static void BuildFrame(){
 
@@ -105,6 +111,15 @@ public class Frame implements WindowListener {
         System.out.println("point 2");
         frame.setVisible(true);
         System.out.println("point 3");
+
+
+        //--------------------Drive---------------
+        DriveSize = new JTextField("Size");
+        DriveSize.setToolTipText("Drive Size");
+
+        DriveType = new ComboBox();
+
+
     }
 
     public static void updateFrame(String os, String cpu, int mem, String gpu){
