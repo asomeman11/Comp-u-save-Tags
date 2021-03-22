@@ -1,19 +1,18 @@
 package com.compusave.tags;
 
-import javafx.scene.control.ComboBox;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.net.URI;
 
 /*
+TODO Fix windows closing operation to properly end profram execution.
 TODO Add more text fields for the system specs.
 TODO Create submit button.
 TODO Make submit button do something.
 TODO Adjust text field Sizes.
-TODO Fix Memory readings.
+TODO Fix memory readings.
 TODO Get Mac SN
  */
 @SuppressWarnings("all")
@@ -50,7 +49,9 @@ public class Frame implements WindowListener {
     private static JTextField OS;
     private static JTextField GPU;
     private static JTextField DriveSize1;
-    private static JComboBox<String> DriveType;
+    private static JTextField DriveSize2;
+    private static JComboBox<String> DriveType1;
+    private static JComboBox<String> DriveType2;
     private static String[] DriveTypes = {"HDD", "SSD", "M.2"};
 
     private static void BuildFrame(){
@@ -124,10 +125,27 @@ public class Frame implements WindowListener {
         panel.add(DriveSize1);
         DriveSize1.setVisible(true);
 
-        DriveType = new JComboBox<String>(DriveTypes);
-        DriveType.setBounds(160,130,60,25);
-        panel.add(DriveType);
-        DriveType.setVisible(true);
+        DriveType1 = new JComboBox<String>(DriveTypes);
+        DriveType1.setBounds(170,130,60,25);
+        panel.add(DriveType1);
+        DriveType1.setVisible(true);
+
+        //--------------------Drive 2--------------
+        JLabel Drive2L = new JLabel("Drive 2");
+        Drive2L.setBounds(15,160,50,25);
+        panel.add(Drive2L);
+        Drive2L.setVisible(true);
+
+        DriveSize2 = new JTextField("Size");
+        DriveSize2.setToolTipText("Drive 2 Size");
+        DriveSize2.setBounds(70,160,70,25);
+        panel.add(DriveSize2);
+        DriveSize2.setVisible(true);
+
+        DriveType2 = new JComboBox<String>(DriveTypes);
+        DriveType2.setBounds(170,160,60,25);
+        panel.add(DriveType2);
+        DriveType2.setVisible(true);
 
 
         System.out.println("point 2");
@@ -173,6 +191,8 @@ public class Frame implements WindowListener {
     /*
      Class is used to properly handle the JFrame closing event
      and shut down any open files and run some finishing commands.
+
+     WARRNING! This class is currently non functional.
 
      @see WindowListener
      @see Main.Stop()

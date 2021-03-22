@@ -6,6 +6,7 @@ import com.profesorfalken.jsensors.model.components.Components;
 import com.profesorfalken.jsensors.model.components.Cpu;
 import com.profesorfalken.jsensors.model.components.Gpu;
 
+import java.lang.management.ManagementFactory;
 import java.util.List;
 
 /*
@@ -29,7 +30,8 @@ public class SysInfo {
     public static String getOS() {return OS;}
     private static String CPU;
     public static String getCPU() {return CPU;}
-    private static final float Memory = Runtime.getRuntime().maxMemory();
+    private static final long Memory = ((com.sun.management.OperatingSystemMXBean) ManagementFactory
+            .getOperatingSystemMXBean()).getTotalPhysicalMemorySize();
     public static float getMemory(){return Memory;}
     private static String GPU;
     public static String getGPU(){return GPU;}
@@ -38,9 +40,11 @@ public class SysInfo {
 
 
     public static void GetSysInfo(){
-        int mb = 1024 * 1024;
 
-        System.out.println(getMemory() / mb);
+        int mb = 1024 * 1024;
+        System.out.println();
+        System.out.println();
+        System.out.println(getMemory());
         System.out.println(getOS());
         /*
         Getting CPU information and setting it to a global variable.
