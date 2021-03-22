@@ -65,7 +65,7 @@ public class Frame implements WindowListener {
 
         Model = new JTextField("Model");
         Model.setToolTipText("System Model");
-        Model.setBounds(70,10,340,25);
+        Model.setBounds(70,10,230,25);
         panel.add(Model);
         Model.setVisible(true);
 
@@ -79,13 +79,14 @@ public class Frame implements WindowListener {
         CPU = new JTextField("CPU");
         CPU.setToolTipText("CPU");
         //Set the location of the text field and the hitbox.
-        CPU.setBounds(70,40,170,25);
+        CPU.setBounds(70,40,230,25);
         panel.add(CPU);
         CPU.setVisible(true);
 
         //-----------------Memory-----------------
         Mem = new JTextField("Memory");
         Mem.setToolTipText("Memory");
+        Mem.setBounds(70,195,70,25);
         panel.add(Mem);
         Mem.setVisible(true);
 
@@ -94,10 +95,11 @@ public class Frame implements WindowListener {
         GPUL.setPreferredSize(new Dimension(50, 25));
         GPUL.setBounds(15,70,50,20);
         panel.add(GPUL);
+        GPUL.setVisible(true);
 
         GPU = new JTextField("GPU");
         GPU.setToolTipText("GPU");
-        GPU.setBounds(70,70,170,25);
+        GPU.setBounds(70,70,230,25);
         panel.add(GPU);
         GPU.setVisible(true);
 
@@ -109,7 +111,7 @@ public class Frame implements WindowListener {
 
         OS = new JTextField("Operating System");
         OS.setToolTipText("Operating System");
-        OS.setBounds(70,100,170,25);
+        OS.setBounds(70,100,230,25);
         panel.add(OS);
         OS.setVisible(true);
 
@@ -121,12 +123,17 @@ public class Frame implements WindowListener {
 
         DriveSize1 = new JTextField("Size");
         DriveSize1.setToolTipText("Drive 1 Size");
-        DriveSize1.setBounds(70,130,70,25);
+        DriveSize1.setBounds(70,130,110,25);
         panel.add(DriveSize1);
         DriveSize1.setVisible(true);
 
+        JLabel DriveType1L = new JLabel("Type:");
+        DriveType1L.setBounds(190,130,70,25);
+        panel.add(DriveType1L);
+        DriveType1L.setVisible(true);
+
         DriveType1 = new JComboBox<String>(DriveTypes);
-        DriveType1.setBounds(170,130,60,25);
+        DriveType1.setBounds(239,130,60,25);
         panel.add(DriveType1);
         DriveType1.setVisible(true);
 
@@ -138,12 +145,17 @@ public class Frame implements WindowListener {
 
         DriveSize2 = new JTextField("Size");
         DriveSize2.setToolTipText("Drive 2 Size");
-        DriveSize2.setBounds(70,160,70,25);
+        DriveSize2.setBounds(70,160,110,25);
         panel.add(DriveSize2);
         DriveSize2.setVisible(true);
 
+        JLabel DriveType2L = new JLabel("Type:");
+        DriveType2L.setBounds(190,160,70,25);
+        panel.add(DriveType2L);
+        DriveType2L.setVisible(true);
+
         DriveType2 = new JComboBox<String>(DriveTypes);
-        DriveType2.setBounds(170,160,60,25);
+        DriveType2.setBounds(239,160,60,25);
         panel.add(DriveType2);
         DriveType2.setVisible(true);
 
@@ -169,8 +181,8 @@ public class Frame implements WindowListener {
             }else{
                 throw new NullPointerException("Unable to load CPU name to frame");
             }
-            if (Integer.toString(mem) != null) {
-                Mem.setText(Integer.toString(mem));
+            if (Integer.toString((int)mem) != null) {
+                Mem.setText(Integer.toString(mem) + " Gb");
             }else{
                 throw new NullPointerException("Unable to load Memory info to frame");
             }

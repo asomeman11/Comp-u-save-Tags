@@ -15,7 +15,7 @@ public class Main {
        Frame.FrameInit();
        System.out.println("Retrieving System Info");
        GetSysInfo();
-       Frame.updateFrame(getOS(), getCPU(), 0, getGPU());
+       Frame.updateFrame(getOS(), getCPU(), Math.round(getMemory() / 1073741824), getGPU());
 
     }
 

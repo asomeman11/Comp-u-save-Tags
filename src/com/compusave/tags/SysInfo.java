@@ -38,13 +38,12 @@ public class SysInfo {
 
 
 
-
     public static void GetSysInfo(){
 
-        int mb = 1024 * 1024;
-        System.out.println();
-        System.out.println();
-        System.out.println(getMemory());
+        //17143336960
+        //1073741824
+
+        System.out.println(Math.round(getMemory() / 1073741824));
         System.out.println(getOS());
         /*
         Getting CPU information and setting it to a global variable.
