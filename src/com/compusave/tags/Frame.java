@@ -16,6 +16,10 @@ TODO Make submit button do something.
 TODO Adjust text field Sizes.
 TODO Fix memory readings.
 TODO Get Mac SN
+TODO add option for fingerprint, Smartcard and thunderbolt.
+TODO Add VRAM spot
+TODO Add pro or home option for win OS
+TODO backlit keyboard
  */
 @SuppressWarnings("all")
 public class Frame extends JPanel implements WindowListener {
@@ -281,7 +285,7 @@ public class Frame extends JPanel implements WindowListener {
         //-----------------Memory-----------------
         Mem = new JTextField("Memory");
         Mem.setToolTipText("Memory");
-        Mem.setBounds(70,195,70,25);
+        Mem.setBounds(70,190,70,25);
         panel.add(Mem);
         Mem.setVisible(true);
 
