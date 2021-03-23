@@ -1,7 +1,5 @@
 # Comp-u-save-Tags
 
-This Program is designed to be used by Comp-U-Save Ltd. in Illinois. 
+This Program is designed to be used by Comp-U-Save Ltd. in Bradley, IL. 
 
-Currently, know errors-
-
-*Integrated graphic will display as "[]"
+This program will be used to generate resale tags for refurbished and new PCs.
