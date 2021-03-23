@@ -1,6 +1,8 @@
 package com.compusave.tags;
 
 
+import com.compusave.tags.Exceptions.InvalidGPUException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
@@ -16,28 +18,32 @@ TODO Fix memory readings.
 TODO Get Mac SN
  */
 @SuppressWarnings("all")
-public class Frame implements WindowListener {
+public class Frame extends JPanel implements WindowListener {
 
     public static JFrame frame;
     private static final Dimension size = new Dimension(900,600);
-    private static JPanel panel;
+    private static Panel panel;
     private static ImageIcon Icon;
+
+    Frame(){
+        FrameInit();
+    }
 
     /*
     Setting up the JFrame for startup and defining initial variables
      */
-    public static void FrameInit(){
+    public void FrameInit(){
         frame = new JFrame();
-        frame.setTitle("Comp-U-Save Tags Client");
+        frame.setTitle("Comp-U-Save Ltd. Tags Client");
         frame.setSize(size);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         Icon = new ImageIcon(Frame.class.getClassLoader().getResource("TagsIcon32x32.png"));
         frame.setIconImage(Icon.getImage());
-
-        panel = new JPanel(null);
+        panel = new Panel();
+        panel.setLayout(null);
         frame.add(panel);
-        System.out.println("point 1");
+        if (Main.isDebug()) {System.out.println("Frame Initilized");}
         BuildFrame();
     }
 
@@ -53,9 +59,198 @@ public class Frame implements WindowListener {
     private static JComboBox<String> DriveType1;
     private static JComboBox<String> DriveType2;
     private static String[] DriveTypes = {"HDD", "SSD", "M.2"};
+    private static JLabel updating;
+    private static boolean Updating = true;
+    private static Graphics g;
 
-    private static void BuildFrame(){
+    private void BuildFrame(){
 
+        if(Main.isDebug()){System.out.println("Building frame and adding componets.");}
+
+        /*
+        g = new Graphics() {
+            @Override
+            public Graphics create() {
+                return g;
+            }
+
+            @Override
+            public void translate(int x, int y) {
+
+            }
+
+            @Override
+            public Color getColor() {
+                return null;
+            }
+
+            @Override
+            public void setColor(Color c) {
+
+            }
+
+            @Override
+            public void setPaintMode() {
+
+            }
+
+            @Override
+            public void setXORMode(Color c1) {
+
+            }
+
+            @Override
+            public Font getFont() {
+                return null;
+            }
+
+            @Override
+            public void setFont(Font font) {
+
+            }
+
+            @Override
+            public FontMetrics getFontMetrics(Font f) {
+                return null;
+            }
+
+            @Override
+            public Rectangle getClipBounds() {
+                return null;
+            }
+
+            @Override
+            public void clipRect(int x, int y, int width, int height) {
+
+            }
+
+            @Override
+            public void setClip(int x, int y, int width, int height) {
+
+            }
+
+            @Override
+            public Shape getClip() {
+                return null;
+            }
+
+            @Override
+            public void setClip(Shape clip) {
+
+            }
+
+            @Override
+            public void copyArea(int x, int y, int width, int height, int dx, int dy) {
+
+            }
+
+            @Override
+            public void drawLine(int x1, int y1, int x2, int y2) {
+
+            }
+
+            @Override
+            public void fillRect(int x, int y, int width, int height) {
+
+            }
+
+            @Override
+            public void clearRect(int x, int y, int width, int height) {
+
+            }
+
+            @Override
+            public void drawRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
+
+            }
+
+            @Override
+            public void fillRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
+
+            }
+
+            @Override
+            public void drawOval(int x, int y, int width, int height) {
+
+            }
+
+            @Override
+            public void fillOval(int x, int y, int width, int height) {
+
+            }
+
+            @Override
+            public void drawArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
+
+            }
+
+            @Override
+            public void fillArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
+
+            }
+
+            @Override
+            public void drawPolyline(int[] xPoints, int[] yPoints, int nPoints) {
+
+            }
+
+            @Override
+            public void drawPolygon(int[] xPoints, int[] yPoints, int nPoints) {
+
+            }
+
+            @Override
+            public void fillPolygon(int[] xPoints, int[] yPoints, int nPoints) {
+
+            }
+
+            @Override
+            public void drawString(String str, int x, int y) {
+
+            }
+
+            @Override
+            public void drawString(AttributedCharacterIterator iterator, int x, int y) {
+
+            }
+
+            @Override
+            public boolean drawImage(Image img, int x, int y, ImageObserver observer) {
+                return false;
+            }
+
+            @Override
+            public boolean drawImage(Image img, int x, int y, int width, int height, ImageObserver observer) {
+                return false;
+            }
+
+            @Override
+            public boolean drawImage(Image img, int x, int y, Color bgcolor, ImageObserver observer) {
+                return false;
+            }
+
+            @Override
+            public boolean drawImage(Image img, int x, int y, int width, int height, Color bgcolor, ImageObserver observer) {
+                return false;
+            }
+
+            @Override
+            public boolean drawImage(Image img, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2, ImageObserver observer) {
+                return false;
+            }
+
+            @Override
+            public boolean drawImage(Image img, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2, Color bgcolor, ImageObserver observer) {
+                return false;
+            }
+
+            @Override
+            public void dispose() {
+
+            }
+        };
+        g.setPaintMode();
+         */
 
         //-----------------Model--------------------
         final JLabel ModelL = new JLabel("Model");
@@ -159,17 +354,22 @@ public class Frame implements WindowListener {
         panel.add(DriveType2);
         DriveType2.setVisible(true);
 
+        updating = new JLabel("Retrieving System Info. Please wait.");
+        updating.setBounds(300,500,400,25);
+        panel.add(updating);
+        updating.setVisible(Updating);
 
-        System.out.println("point 2");
+        //panel.paintComponet(g.create());
+
+        if(Main.isDebug()){System.out.println("Componets added to frame");}
         frame.setVisible(true);
-        System.out.println("point 3");
-
-
+        if(Main.isDebug()){System.out.println("Frame set to visible");}
 
 
     }
 
     public static void updateFrame(String os, String cpu, int mem, String gpu){
+        if(Main.isDebug()){System.out.println("System Info retrived, updating componets.");}
         try {
             if (os != null) {
                 OS.setText(os);
@@ -189,12 +389,22 @@ public class Frame implements WindowListener {
             if (gpu != null) {
                 GPU.setText(gpu);
             }else{
-                throw new NullPointerException("Unable to load GPU name to frame. Please add it manually to the tag.");
+                throw new InvalidGPUException("Invalid GPU detected. If this system has integrated graphics, you may disregard this error." +
+                " If not, please contact Gerry and let him know you broke his damn program. ");
             }
         }catch (NullPointerException e){
             e.printStackTrace();
+        }catch (InvalidGPUException e){
+            System.err.println(e.getMessage());
         }
+        System.out.println("Componets successfully updated. Please check tag for accuracy.");
+        updating.setText("Update complete.");
     }
+
+
+
+
+
     //Not Used
     @Override
     public void windowOpened(WindowEvent e) {}

@@ -1,5 +1,6 @@
 package com.compusave.tags;
 
+import com.compusave.tags.Exceptions.InvalidCPUException;
 import com.compusave.tags.Exceptions.InvalidGPUException;
 import com.profesorfalken.jsensors.JSensors;
 import com.profesorfalken.jsensors.model.components.Components;
@@ -43,8 +44,8 @@ public class SysInfo {
         //17143336960
         //1073741824
 
-        System.out.println(Math.round(getMemory() / 1073741824));
-        System.out.println(getOS());
+        if(Main.isDebug()){System.out.println(Math.round(getMemory() / 1073741824));}
+        if(Main.isDebug()){System.out.println(getOS());}
         /*
         Getting CPU information and setting it to a global variable.
         @see com.compusave.tags.Exceptions.InvalidCPUException
@@ -55,12 +56,12 @@ public class SysInfo {
             if (cpus != null) {
                 for (final Cpu cpu : cpus) {
                     CPU = cpu.name;
-                    System.out.println(getCPU());
+                    if(Main.isDebug()){System.out.println(getCPU());}
                 }
             }else{
-                throw new InvalidGPUException("It appears somehow you managed to break my program with you strange CPU. Shame on you.");
+                throw new InvalidCPUException("It appears somehow you managed to break my program with you strange CPU. Shame on you.");
             }
-        }catch (InvalidGPUException e) {
+        }catch (InvalidCPUException e) {
             e.printStackTrace();
         }
 
@@ -70,13 +71,13 @@ public class SysInfo {
         @see SysInfo.getGPU();
         */
         List<Gpu> gpus = getComponents().gpus;
-        System.out.println(gpus);
+        if(Main.isDebug()){System.out.println(gpus);}
         try {
             if (gpus != null) {
                 for (final Gpu gpu : gpus) {
                     GPU = gpu.name;
                     if (!getGPU().equals("[]")) {
-                        System.out.println(getGPU());
+                        if(Main.isDebug()){System.out.println(getGPU());}
                     } else {
                         throw new InvalidGPUException("It appears the system cannot properly obtain the GPU info. Does the System have integrated graphics?");
                     }
@@ -86,7 +87,6 @@ public class SysInfo {
             System.out.println("Unable to determine GPU. Please manually add it to the tag.");
             e.printStackTrace();
         }
-
 
     }
 
