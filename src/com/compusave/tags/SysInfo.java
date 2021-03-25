@@ -2,6 +2,7 @@ package com.compusave.tags;
 
 import com.compusave.tags.Exceptions.InvalidCPUException;
 import com.compusave.tags.Exceptions.InvalidGPUException;
+import com.compusave.tags.Exceptions.InvalidOSException;
 import com.profesorfalken.jsensors.JSensors;
 import com.profesorfalken.jsensors.model.components.Components;
 import com.profesorfalken.jsensors.model.components.Cpu;
@@ -43,9 +44,33 @@ public class SysInfo {
 
         //17143336960
         //1073741824
+        try {
+            switch (getOS().toUpperCase()) {
+                case "WINDOWS 10":
+                    WinInfo();
+                    break;
+                case "MACOS":
+                    MacInfo();
+                    break;
+                case "Linux":
+                    LinuxInfo();
+                    break;
+                default:
+                    throw new InvalidOSException("ERROR! OS " + getOS() + "is currently not a properly supported OS. Curse you for finding problems with my code." +
+                            "You may manually enter the tag info. Please report this to Gerry for a proper scolding.");
+            }
+        } catch (InvalidOSException e) {
+            e.printStackTrace();
+            System.err.println(e.getMessage());
 
-        if(Main.isDebug()){System.out.println(Math.round(getMemory() / 1073741824));}
-        if(Main.isDebug()){System.out.println(getOS());}
+        }
+
+
+    }
+
+    private static void WinInfo(){
+        if(Main.isVerbose()){System.out.println(Math.round(getMemory() / 1073741824));}
+        if(Main.isVerbose()){System.out.println(getOS());}
         /*
         Getting CPU information and setting it to a global variable.
         @see com.compusave.tags.Exceptions.InvalidCPUException
@@ -56,7 +81,7 @@ public class SysInfo {
             if (cpus != null) {
                 for (final Cpu cpu : cpus) {
                     CPU = cpu.name;
-                    if(Main.isDebug()){System.out.println(getCPU());}
+                    if(Main.isVerbose()){System.out.println(getCPU());}
                 }
             }else{
                 throw new InvalidCPUException("It appears somehow you managed to break my program with you strange CPU. Shame on you.");
@@ -71,13 +96,13 @@ public class SysInfo {
         @see SysInfo.getGPU();
         */
         List<Gpu> gpus = getComponents().gpus;
-        if(Main.isDebug()){System.out.println(gpus);}
+        if(Main.isVerbose()){System.out.println(gpus);}
         try {
             if (gpus != null) {
                 for (final Gpu gpu : gpus) {
                     GPU = gpu.name;
                     if (!getGPU().equals("[]")) {
-                        if(Main.isDebug()){System.out.println(getGPU());}
+                        if(Main.isVerbose()){System.out.println(getGPU());}
                     } else {
                         throw new InvalidGPUException("It appears the system cannot properly obtain the GPU info. Does the System have integrated graphics?");
                     }
@@ -90,4 +115,11 @@ public class SysInfo {
 
     }
 
+    private static void MacInfo(){
+
+    }
+
+    private static void LinuxInfo(){
+
+    }
 }

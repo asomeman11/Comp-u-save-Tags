@@ -1,18 +1,20 @@
 package com.compusave.tags;
 
-import java.util.Locale;
-
 import static com.compusave.tags.SysInfo.*;
 
+@SuppressWarnings("unused")
 public class Main {
 
-    private static Boolean Debug = false;
-    public static boolean isDebug() {return Debug;}
+    private static boolean Debug = false;
+    public static boolean isDebug(){return Debug;}
     private static Boolean Verbose = false;
+    public static boolean isVerbose() {return Verbose;}
+    private static boolean Manual = false;
+    public static boolean isManual(){return Manual;}
 
     public static void main(String[] args){
-        for (int x = 0; x < args.length; x++){
-            switch(args[x].toUpperCase(Locale.ROOT)){
+        for (String arg : args) {
+            switch (arg.toUpperCase()) {
                 case "DEBUG":
                     Debug = true;
                     System.out.println("Debug mode enabled!");
@@ -21,26 +23,23 @@ public class Main {
                     Verbose = true;
                     System.out.println("Verbose mode enabled!");
                     break;
+                case "MANUAL":
+                    Manual = true;
+                    System.out.println("Manual input mode selected! Will not run sysinfo update.");
+                    break;
                 default:
-                    System.err.println("Invalid Command \"" + args[x] + "\"");
-
+                    System.err.println("Invalid Command \"" + arg + "\"");
+                    break;
             }
-
-
         }
-
-
-       Frame fr = new Frame();
+       new Frame();
        System.out.println("Retrieving System Info");
        GetSysInfo();
        Frame.updateFrame(getOS(), getCPU(), Math.round(getMemory() / 1073741824), getGPU());
-
     }
 
     public static void Stop(){
         System.out.println("Program Successfully closed.");
         System.exit(0);
-
     }
-
 }
