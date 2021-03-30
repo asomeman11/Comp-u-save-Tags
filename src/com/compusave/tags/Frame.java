@@ -57,11 +57,10 @@ public class Frame extends JPanel implements WindowListener {
     private static JTextField Model;
     private static JTextField CPU;
     private static JTextField Mem;
-    private static String[] MemTypes = {"DDR","DDR2","DDR3", "DDR3L","DDR4","DDR5","ECC"};
+    private static String[] MemTypes = {"Select","DDR","DDR2","DDR3","DDR3L","DDR4","DDR5","ECC"};
     private static JComboBox<String> MemType;
     private static JTextField OS;
     private static JTextField GPU;
-    private static JTextField VRAM;
     private static JTextField DriveSize1;
     private static JTextField DriveSize2;
     private static JComboBox<String> DriveType1;
@@ -117,7 +116,7 @@ public class Frame extends JPanel implements WindowListener {
         panel.add(Mem);
         Mem.setVisible(true);
 
-        JLabel MemTypL = new JLabel("Type");
+        JLabel MemTypL = new JLabel("Type:");
         MemTypL.setBounds(150,MemY,50,H);
         panel.add(MemTypL);
         MemTypL.setVisible(true);
@@ -136,32 +135,9 @@ public class Frame extends JPanel implements WindowListener {
 
         GPU = new JTextField("GPU");
         GPU.setToolTipText("GPU");
-        GPU.setBounds(70,GPUY,190,H);
+        GPU.setBounds(70,GPUY,230,H);
         panel.add(GPU);
         GPU.setVisible(true);
-
-        final JLabel VRAML = new JLabel("VRAM");
-        VRAML.setBounds(270,GPUY,50,H);
-        panel.add(VRAML);
-        VRAML.setVisible(true);
-
-        VRAM = new JTextField("Size");
-        VRAM.setBounds(320,GPUY,50,H);
-        panel.add(VRAM);
-        VRAM.setVisible(true);
-
-        //---------------OS------------------------
-        int OSY = 190;
-        JLabel OSL = new JLabel("OS");
-        OSL.setBounds(15,OSY,50,H);
-        panel.add(OSL);
-        OSL.setVisible(true);
-
-        OS = new JTextField("Operating System");
-        OS.setToolTipText("Operating System");
-        OS.setBounds(70,OSY,230,H);
-        panel.add(OS);
-        OS.setVisible(true);
 
         //--------------------Drive 1--------------
         int D1Y = 130;
@@ -208,6 +184,28 @@ public class Frame extends JPanel implements WindowListener {
         DriveType2.setBounds(239,D2Y,60,H);
         panel.add(DriveType2);
         DriveType2.setVisible(true);
+
+        //---------------OS------------------------
+        int OSY = 190;
+        JLabel OSL = new JLabel("OS");
+        OSL.setBounds(15,OSY,50,H);
+        panel.add(OSL);
+        OSL.setVisible(true);
+
+        OS = new JTextField("Operating System");
+        OS.setToolTipText("Operating System");
+        OS.setBounds(70,OSY,230,H);
+        panel.add(OS);
+        OS.setVisible(true);
+
+
+        //--------------------Optical----------------
+
+        int DVDY = 220;
+        JLabel opticalL = new JLabel("Optical");
+        opticalL.setBounds(15,DVDY,50,H);
+        panel.add(opticalL);
+        opticalL.setVisible(true);
 
         updating = new JLabel("Retrieving System Info. Please wait.");
         updating.setBounds(300,500,400,H);
