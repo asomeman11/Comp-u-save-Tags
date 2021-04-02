@@ -42,7 +42,7 @@ public class Frame extends JPanel implements WindowListener {
         frame.setTitle("Comp-U-Save Ltd. Tags Client");
         frame.setSize(size);
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Icon = new ImageIcon(Frame.class.getClassLoader().getResource("TagsIcon32x32.png"));
         frame.setIconImage(Icon.getImage());
         panel = new Panel();
@@ -65,18 +65,43 @@ public class Frame extends JPanel implements WindowListener {
     private static JTextField DriveSize2;
     private static JComboBox<String> DriveType1;
     private static JComboBox<String> DriveType2;
-    private static String[] DriveTypes = {"None", "HDD", "SSD", "M.2"};
+    private static String[] DriveTypes = {"Select","None","HDD","SSD","M.2","SSHD"};
+    private static String[] ScreenSizes = {"7\"", "7.9\"", "8\"", "8.9\"", "9\"", "10\"", "10.1\"", "11\"", "11.6\"", "12\"", "12.1\"", "12.5\"",
+            "13\"", "13.1\"", "13.3\"", "14\"", "14.1\"", "14.5\"", "15\"", "15.1\"", "15.4\"", "15.5\"", "15.6\"", "16\"", "16.4\"", "17\"",
+            "17.1\"", "17.3\"", "18\"", "18.4\"", "18.5\"", "19\"", "19.5\"", "20\"", "20.1\"", "21\"", "21.5\"", "22\"", "23\"", "23.6\"",
+            "24\"", "25\"", "26\"", "27\"", "28\"", "Other", "NA"};
+    private static String[] DVDtypes = {"None","CD Player","DVD Player","CD Burner",
+            "Combo","DVD Burner","Blu-Ray Player","Blu-Ray Combo","Blu-Ray Burner"};
+    private static JComboBox<String> diskDrive1;
+    private static JComboBox<String> diskDrive2;
     private static JLabel updating;
     private static boolean Updating = true;
-    private static Graphics g;
+    //private static Graphics g;
 
     private void BuildFrame(){
+        //Defines the height for all of the componets.
         int H = 25;
+
+        //Defines the Y location for the model info
+        int ModelY = 10;
+        //Defines the Y location for the cpu info
+        int CPUY = 40;
+        //Defines the Y location for memory info
+        int MemY = 70;
+        //Defines the Y location for the first HDD/SSD
+        int D1Y = 100;
+        //Defines the Y location for the seccond HDD/SSD
+        int D2Y = 130;
+        //Defines the Y location for gpu info
+        int GPUY = 160;
+        //Defines the Y location for the optical media
+        int DVDY = 190;
+        //Defines the Y location for os info line
+        int OSY = 220;
 
         if(Main.isVerbose()){System.out.println("Building frame and adding componets.");}
 
         //-----------------Model--------------------
-        int ModelY = 10;
         final JLabel ModelL = new JLabel("Model");
         ModelL.setBounds(15,ModelY,50,H);
         ModelL.setVisible(true);
@@ -90,7 +115,6 @@ public class Frame extends JPanel implements WindowListener {
 
 
         //-----------------CPU--------------------
-        int CPUY = 40;
         final JLabel CPUL = new JLabel("CPU");
         CPUL.setBounds(15,CPUY,50,H);
         panel.add(CPUL);
@@ -103,8 +127,6 @@ public class Frame extends JPanel implements WindowListener {
         CPU.setVisible(true);
 
         //-----------------Memory-----------------
-        int MemY = 70;
-
         JLabel MemL = new JLabel("Memory");
         MemL.setBounds(15,MemY,50,H);
         panel.add(MemL);
@@ -112,35 +134,21 @@ public class Frame extends JPanel implements WindowListener {
 
         Mem = new JTextField("Size");
         Mem.setToolTipText("Size of installed memory");
-        Mem.setBounds(70,MemY,70,H);
+        Mem.setBounds(70,MemY,110,H);
         panel.add(Mem);
         Mem.setVisible(true);
 
         JLabel MemTypL = new JLabel("Type:");
-        MemTypL.setBounds(150,MemY,50,H);
+        MemTypL.setBounds(190,MemY,50,H);
         panel.add(MemTypL);
         MemTypL.setVisible(true);
 
         MemType = new JComboBox<String>(MemTypes);
-        MemType.setBounds(210,MemY,70,H);
+        MemType.setBounds(234,MemY,65,H);
         panel.add(MemType);
         MemType.setVisible(true);
 
-        //-------------------GPU-----------------
-        int GPUY = 100;
-        final JLabel GPUL = new JLabel("GPU");
-        GPUL.setBounds(15,GPUY,50,H);
-        panel.add(GPUL);
-        GPUL.setVisible(true);
-
-        GPU = new JTextField("GPU");
-        GPU.setToolTipText("GPU");
-        GPU.setBounds(70,GPUY,230,H);
-        panel.add(GPU);
-        GPU.setVisible(true);
-
         //--------------------Drive 1--------------
-        int D1Y = 130;
         JLabel Drive1L = new JLabel("Drive 1");
         Drive1L.setBounds(15,D1Y,50,H);
         panel.add(Drive1L);
@@ -158,12 +166,11 @@ public class Frame extends JPanel implements WindowListener {
         DriveType1L.setVisible(true);
 
         DriveType1 = new JComboBox<String>(DriveTypes);
-        DriveType1.setBounds(239,D1Y,60,H);
+        DriveType1.setBounds(234,D1Y,65,H);
         panel.add(DriveType1);
         DriveType1.setVisible(true);
 
         //--------------------Drive 2--------------
-        int D2Y = 160;
         JLabel Drive2L = new JLabel("Drive 2");
         Drive2L.setBounds(15,D2Y,50,H);
         panel.add(Drive2L);
@@ -181,12 +188,39 @@ public class Frame extends JPanel implements WindowListener {
         DriveType2L.setVisible(true);
 
         DriveType2 = new JComboBox<String>(DriveTypes);
-        DriveType2.setBounds(239,D2Y,60,H);
+        DriveType2.setBounds(234,D2Y,65,H);
         panel.add(DriveType2);
         DriveType2.setVisible(true);
 
+        //-------------------GPU-----------------
+        final JLabel GPUL = new JLabel("GPU");
+        GPUL.setBounds(15,GPUY,50,H);
+        panel.add(GPUL);
+        GPUL.setVisible(true);
+
+        GPU = new JTextField("GPU");
+        GPU.setToolTipText("GPU");
+        GPU.setBounds(70,GPUY,230,H);
+        panel.add(GPU);
+        GPU.setVisible(true);
+
+        //--------------------Optical----------------
+        JLabel opticalL = new JLabel("Optical");
+        opticalL.setBounds(15,DVDY,50,H);
+        panel.add(opticalL);
+        opticalL.setVisible(true);
+
+        diskDrive1 = new JComboBox<>(DVDtypes);
+        diskDrive1.setBounds(70,DVDY,110,H);
+        panel.add(diskDrive1);
+        diskDrive1.setVisible(true);
+
+        diskDrive2 = new JComboBox<>(DVDtypes);
+        diskDrive2.setBounds(190,DVDY,110,H);
+        panel.add(diskDrive2);
+        diskDrive2.setVisible(true);
+
         //---------------OS------------------------
-        int OSY = 190;
         JLabel OSL = new JLabel("OS");
         OSL.setBounds(15,OSY,50,H);
         panel.add(OSL);
@@ -198,15 +232,7 @@ public class Frame extends JPanel implements WindowListener {
         panel.add(OS);
         OS.setVisible(true);
 
-
-        //--------------------Optical----------------
-
-        int DVDY = 220;
-        JLabel opticalL = new JLabel("Optical");
-        opticalL.setBounds(15,DVDY,50,H);
-        panel.add(opticalL);
-        opticalL.setVisible(true);
-
+        //--------------------Status------------------
         updating = new JLabel("Retrieving System Info. Please wait.");
         updating.setBounds(300,500,400,H);
         panel.add(updating);
@@ -218,9 +244,16 @@ public class Frame extends JPanel implements WindowListener {
         frame.setVisible(true);
         if(Main.isVerbose()){System.out.println("Frame set to visible");}
 
-
     }
 
+
+    /*
+    This class is called by the <Code>Sysinfo</Code> class.
+    When this is called, it will pass through the os,
+    CPU and GPU name as well as the amount of system memory
+    @Peramiters String os, String cpu, int mem, String gpu
+    @See com.compusave.tags.Sysinfo
+     */
     public static void updateFrame(String os, String cpu, int mem, String gpu){
         if(Main.isVerbose()){System.out.println("System Info retrived, updating componets.");}
         try {
