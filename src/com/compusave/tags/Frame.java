@@ -80,8 +80,7 @@ public class Frame extends JPanel implements WindowListener {
 
     private void BuildFrame(){
         //Defines the height for all of the componets.
-        int H = 25;
-
+        int Height = 25;
         //Defines the Y location for the model info
         int ModelY = 10;
         //Defines the Y location for the cpu info
@@ -98,147 +97,155 @@ public class Frame extends JPanel implements WindowListener {
         int DVDY = 190;
         //Defines the Y location for os info line
         int OSY = 220;
+        //Defines the Y location for the scores line
+        int ScY = 250;
 
         if(Main.isVerbose()){System.out.println("Building frame and adding componets.");}
 
         //-----------------Model--------------------
         final JLabel ModelL = new JLabel("Model");
-        ModelL.setBounds(15,ModelY,50,H);
+        ModelL.setBounds(15,ModelY,50,Height);
         ModelL.setVisible(true);
         panel.add(ModelL);
 
         Model = new JTextField("Model");
         Model.setToolTipText("System Model");
-        Model.setBounds(70,ModelY,230,H);
+        Model.setBounds(70,ModelY,230,Height);
         panel.add(Model);
         Model.setVisible(true);
 
 
         //-----------------CPU--------------------
         final JLabel CPUL = new JLabel("CPU");
-        CPUL.setBounds(15,CPUY,50,H);
+        CPUL.setBounds(15,CPUY,50,Height);
         panel.add(CPUL);
 
         CPU = new JTextField("CPU");
         CPU.setToolTipText("CPU");
         //Set the location of the text field and the hitbox.
-        CPU.setBounds(70,CPUY,230,H);
+        CPU.setBounds(70,CPUY,230,Height);
         panel.add(CPU);
         CPU.setVisible(true);
 
         //-----------------Memory-----------------
         JLabel MemL = new JLabel("Memory");
-        MemL.setBounds(15,MemY,50,H);
+        MemL.setBounds(15,MemY,50,Height);
         panel.add(MemL);
         MemL.setVisible(true);
 
         Mem = new JTextField("Size");
         Mem.setToolTipText("Size of installed memory");
-        Mem.setBounds(70,MemY,110,H);
+        Mem.setBounds(70,MemY,110,Height);
         panel.add(Mem);
         Mem.setVisible(true);
 
         JLabel MemTypL = new JLabel("Type:");
-        MemTypL.setBounds(190,MemY,50,H);
+        MemTypL.setBounds(190,MemY,50,Height);
         panel.add(MemTypL);
         MemTypL.setVisible(true);
 
         MemType = new JComboBox<String>(MemTypes);
-        MemType.setBounds(234,MemY,65,H);
+        MemType.setBounds(234,MemY,65,Height);
         panel.add(MemType);
         MemType.setVisible(true);
 
         //--------------------Drive 1--------------
         JLabel Drive1L = new JLabel("Drive 1");
-        Drive1L.setBounds(15,D1Y,50,H);
+        Drive1L.setBounds(15,D1Y,50,Height);
         panel.add(Drive1L);
         Drive1L.setVisible(true);
 
         DriveSize1 = new JTextField("Size");
         DriveSize1.setToolTipText("Drive 1 Size");
-        DriveSize1.setBounds(70,D1Y,110,H);
+        DriveSize1.setBounds(70,D1Y,110,Height);
         panel.add(DriveSize1);
         DriveSize1.setVisible(true);
 
         JLabel DriveType1L = new JLabel("Type:");
-        DriveType1L.setBounds(190,D1Y,70,H);
+        DriveType1L.setBounds(190,D1Y,70,Height);
         panel.add(DriveType1L);
         DriveType1L.setVisible(true);
 
         DriveType1 = new JComboBox<String>(DriveTypes);
-        DriveType1.setBounds(234,D1Y,65,H);
+        DriveType1.setBounds(234,D1Y,65,Height);
         panel.add(DriveType1);
         DriveType1.setVisible(true);
 
         //--------------------Drive 2--------------
         JLabel Drive2L = new JLabel("Drive 2");
-        Drive2L.setBounds(15,D2Y,50,H);
+        Drive2L.setBounds(15,D2Y,50,Height);
         panel.add(Drive2L);
         Drive2L.setVisible(true);
 
         DriveSize2 = new JTextField("Size");
         DriveSize2.setToolTipText("Drive 2 Size");
-        DriveSize2.setBounds(70,D2Y,110,H);
+        DriveSize2.setBounds(70,D2Y,110,Height);
         panel.add(DriveSize2);
         DriveSize2.setVisible(true);
 
         JLabel DriveType2L = new JLabel("Type:");
-        DriveType2L.setBounds(190,D2Y,70,H);
+        DriveType2L.setBounds(190,D2Y,70,Height);
         panel.add(DriveType2L);
         DriveType2L.setVisible(true);
 
         DriveType2 = new JComboBox<String>(DriveTypes);
-        DriveType2.setBounds(234,D2Y,65,H);
+        DriveType2.setBounds(234,D2Y,65,Height);
         panel.add(DriveType2);
         DriveType2.setVisible(true);
 
         //-------------------GPU-----------------
         final JLabel GPUL = new JLabel("GPU");
-        GPUL.setBounds(15,GPUY,50,H);
+        GPUL.setBounds(15,GPUY,50,Height);
         panel.add(GPUL);
         GPUL.setVisible(true);
 
         GPU = new JTextField("GPU");
         GPU.setToolTipText("GPU");
-        GPU.setBounds(70,GPUY,230,H);
+        GPU.setBounds(70,GPUY,230,Height);
         panel.add(GPU);
         GPU.setVisible(true);
 
         //--------------------Optical----------------
         JLabel opticalL = new JLabel("Optical");
-        opticalL.setBounds(15,DVDY,50,H);
+        opticalL.setBounds(15,DVDY,50,Height);
         panel.add(opticalL);
         opticalL.setVisible(true);
 
         diskDrive1 = new JComboBox<>(DVDtypes);
-        diskDrive1.setBounds(70,DVDY,110,H);
+        diskDrive1.setBounds(70,DVDY,110,Height);
         panel.add(diskDrive1);
         diskDrive1.setVisible(true);
 
         diskDrive2 = new JComboBox<>(DVDtypes);
-        diskDrive2.setBounds(190,DVDY,110,H);
+        diskDrive2.setBounds(190,DVDY,110,Height);
         panel.add(diskDrive2);
         diskDrive2.setVisible(true);
 
         //---------------OS------------------------
         JLabel OSL = new JLabel("OS");
-        OSL.setBounds(15,OSY,50,H);
+        OSL.setBounds(15,OSY,50,Height);
         panel.add(OSL);
         OSL.setVisible(true);
 
         OS = new JTextField("Operating System");
         OS.setToolTipText("Operating System");
-        OS.setBounds(70,OSY,230,H);
+        OS.setBounds(70,OSY,230,Height);
         panel.add(OS);
         OS.setVisible(true);
 
+        //--------------------Scores__________________
+        JLabel Scoresl = new JLabel("Scores:");
+        Scoresl.setBounds(15,ScY,50,Height);
+        panel.add(Scoresl);
+
+
         //--------------------Status------------------
         updating = new JLabel("Retrieving System Info. Please wait.");
-        updating.setBounds(300,500,400,H);
+        updating.setBounds(300,500,400,Height);
         panel.add(updating);
         updating.setVisible(Updating);
 
-        //panel.paintComponet(g.create());
+        panel.paintComponent(panel.getGraphics());
 
         if(Main.isVerbose()){System.out.println("Componets added to frame");}
         frame.setVisible(true);
