@@ -9,6 +9,7 @@ public class Panel extends JPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         g.setColor(Color.BLACK);
-        g.drawLine(300,10,300,600);
+        g.drawLine(600,10,600,495);
+        g.drawLine(10,500,595,500);
     }
 }

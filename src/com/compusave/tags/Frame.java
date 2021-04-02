@@ -74,9 +74,12 @@ public class Frame extends JPanel implements WindowListener {
             "Combo","DVD Burner","Blu-Ray Player","Blu-Ray Combo","Blu-Ray Burner"};
     private static JComboBox<String> diskDrive1;
     private static JComboBox<String> diskDrive2;
+    private static JTextField CPUScores;
+    private static float CPUScore;
+    private static JTextField GPUScores;
+    private static float GPUScore;
     private static JLabel updating;
     private static boolean Updating = true;
-    //private static Graphics g;
 
     private void BuildFrame(){
         //Defines the height for all of the componets.
@@ -233,10 +236,21 @@ public class Frame extends JPanel implements WindowListener {
         panel.add(OS);
         OS.setVisible(true);
 
-        //--------------------Scores__________________
-        JLabel Scoresl = new JLabel("Scores:");
+        //--------------------Scores------------------
+        JLabel Scoresl = new JLabel("Scores");
         Scoresl.setBounds(15,ScY,50,Height);
         panel.add(Scoresl);
+        Scoresl.setVisible(true);
+
+        JLabel ScoreCPUl = new JLabel("CPU:");
+        ScoreCPUl.setBounds(69,ScY,30,Height);
+        panel.add(ScoreCPUl);
+        ScoreCPUl.setVisible(true);
+
+        CPUScores = new JTextField();
+        CPUScores.setBounds(100,ScY,70,Height);
+        panel.add(CPUScores);
+        CPUScores.setVisible(true);
 
 
         //--------------------Status------------------
@@ -245,7 +259,6 @@ public class Frame extends JPanel implements WindowListener {
         panel.add(updating);
         updating.setVisible(Updating);
 
-        panel.paintComponent(panel.getGraphics());
 
         if(Main.isVerbose()){System.out.println("Componets added to frame");}
         frame.setVisible(true);
