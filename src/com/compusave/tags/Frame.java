@@ -5,6 +5,8 @@ import com.compusave.tags.Exceptions.InvalidGPUException;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -23,7 +25,7 @@ TODO backlit keyboard
  */
 
 @SuppressWarnings("all")
-public class Frame extends JPanel implements WindowListener {
+public class Frame implements WindowListener {
 
     public static JFrame frame;
     private static final Dimension size = new Dimension(900,600);
@@ -57,7 +59,7 @@ public class Frame extends JPanel implements WindowListener {
     private static JTextField Model;
     private static JTextField CPU;
     private static JTextField Mem;
-    private static String[] MemTypes = {"Select","DDR","DDR2","DDR3","DDR3L","DDR4","DDR5","ECC"};
+    private static final String[] MemTypes = {"Select","DDR","DDR2","DDR3","DDR3L","DDR4","DDR5","ECC"};
     private static JComboBox<String> MemType;
     private static JTextField OS;
     private static JTextField GPU;
@@ -65,12 +67,8 @@ public class Frame extends JPanel implements WindowListener {
     private static JTextField DriveSize2;
     private static JComboBox<String> DriveType1;
     private static JComboBox<String> DriveType2;
-    private static String[] DriveTypes = {"Select","None","HDD","SSD","M.2","SSHD"};
-    private static String[] ScreenSizes = {"7\"", "7.9\"", "8\"", "8.9\"", "9\"", "10\"", "10.1\"", "11\"", "11.6\"", "12\"", "12.1\"", "12.5\"",
-            "13\"", "13.1\"", "13.3\"", "14\"", "14.1\"", "14.5\"", "15\"", "15.1\"", "15.4\"", "15.5\"", "15.6\"", "16\"", "16.4\"", "17\"",
-            "17.1\"", "17.3\"", "18\"", "18.4\"", "18.5\"", "19\"", "19.5\"", "20\"", "20.1\"", "21\"", "21.5\"", "22\"", "23\"", "23.6\"",
-            "24\"", "25\"", "26\"", "27\"", "28\"", "Other", "NA"};
-    private static String[] DVDtypes = {"None","CD Player","DVD Player","CD Burner",
+    private static final String[] DriveTypes = {"Select","None","HDD","SSD","M.2","SSHD"};
+    private static final String[] DVDtypes = {"None","CD Player","DVD Player","CD Burner",
             "Combo","DVD Burner","Blu-Ray Player","Blu-Ray Combo","Blu-Ray Burner"};
     private static JComboBox<String> diskDrive1;
     private static JComboBox<String> diskDrive2;
@@ -78,30 +76,38 @@ public class Frame extends JPanel implements WindowListener {
     private static float CPUScore;
     private static JTextField GPUScores;
     private static float GPUScore;
+    private static JTextField Battery;
+    private static final String[] ScreenSizes = {"7\"", "7.9\"", "8\"", "8.9\"", "9\"", "10\"", "10.1\"", "11\"", "11.6\"", "12\"", "12.1\"", "12.5\"",
+            "13\"", "13.1\"", "13.3\"", "14\"", "14.1\"", "14.5\"", "15\"", "15.1\"", "15.4\"", "15.5\"", "15.6\"", "16\"", "16.4\"", "17\"",
+            "17.1\"", "17.3\"", "18\"", "18.4\"", "18.5\"", "19\"", "19.5\"", "20\"", "20.1\"", "21\"", "21.5\"", "22\"", "23\"", "23.6\"",
+            "24\"", "25\"", "26\"", "27\"", "28\"", "Other", "NA"};
+    private static final String[] ScreenTypes = {"LCD", "LED", "LCD Touchscreen", "LED Touchscreen"};
     private static JLabel updating;
     private static boolean Updating = true;
 
     private void BuildFrame(){
         //Defines the height for all of the componets.
-        int Height = 25;
+        final int Height = 25;
         //Defines the Y location for the model info
-        int ModelY = 10;
+        final int ModelY = 10;
         //Defines the Y location for the cpu info
-        int CPUY = 40;
+        final int CPUY = 40;
         //Defines the Y location for memory info
-        int MemY = 70;
+        final int MemY = 70;
         //Defines the Y location for the first HDD/SSD
-        int D1Y = 100;
+        final int D1Y = 100;
         //Defines the Y location for the seccond HDD/SSD
-        int D2Y = 130;
+        final int D2Y = 130;
         //Defines the Y location for gpu info
-        int GPUY = 160;
+        final int GPUY = 160;
         //Defines the Y location for the optical media
-        int DVDY = 190;
+        final int DVDY = 190;
         //Defines the Y location for os info line
-        int OSY = 220;
+        final int OSY = 220;
         //Defines the Y location for the scores line
-        int ScY = 250;
+        final int ScY = 250;
+        //Defines the Y location for the battery line
+        final int BatY = 280;
 
         if(Main.isVerbose()){System.out.println("Building frame and adding componets.");}
 
@@ -193,6 +199,12 @@ public class Frame extends JPanel implements WindowListener {
 
         DriveType2 = new JComboBox<String>(DriveTypes);
         DriveType2.setBounds(234,D2Y,65,Height);
+        DriveType2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
         panel.add(DriveType2);
         DriveType2.setVisible(true);
 
@@ -248,10 +260,30 @@ public class Frame extends JPanel implements WindowListener {
         ScoreCPUl.setVisible(true);
 
         CPUScores = new JTextField();
-        CPUScores.setBounds(100,ScY,70,Height);
+        CPUScores.setBounds(103,ScY,77,Height);
         panel.add(CPUScores);
         CPUScores.setVisible(true);
 
+        JLabel ScoreGPU = new JLabel("GPU:");
+        ScoreGPU.setBounds(185,ScY,30,Height);
+        panel.add(ScoreGPU);
+        ScoreGPU.setVisible(true);
+
+        GPUScores = new JTextField();
+        GPUScores.setBounds(220,ScY,80,Height);
+        panel.add(GPUScores);
+        GPUScores.setVisible(true);
+
+        //--------------------Battery----------------
+        JLabel Batteryl = new JLabel("Battery");
+        Batteryl.setBounds(15, BatY, 50,Height);
+        panel.add(Batteryl);
+        Batteryl.setVisible(true);
+
+        Battery = new JTextField();
+        Battery.setBounds(70, BatY, 230, Height);
+        panel.add(Battery);
+        Battery.setVisible(true);
 
         //--------------------Status------------------
         updating = new JLabel("Retrieving System Info. Please wait.");
@@ -307,14 +339,9 @@ public class Frame extends JPanel implements WindowListener {
         updating.setText("Update complete.");
     }
 
-
-
-
-
     //Not Used
     @Override
     public void windowOpened(WindowEvent e) {}
-
 
     /*
      Class is used to properly handle the JFrame closing event
