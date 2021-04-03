@@ -67,7 +67,7 @@ public class Frame implements WindowListener {
     private static JTextField DriveSize2;
     private static JComboBox<String> DriveType1;
     private static JComboBox<String> DriveType2;
-    private static final String[] DriveTypes = {"Select","None","HDD","SSD","M.2","SSHD"};
+    private static final String[] DriveTypes = {"Select","None","HDD","SSD","M.2","NVMe","mSata","SSHD"};
     private static final String[] DVDtypes = {"None","CD Player","DVD Player","CD Burner",
             "Combo","DVD Burner","Blu-Ray Player","Blu-Ray Combo","Blu-Ray Burner"};
     private static JComboBox<String> diskDrive1;
@@ -77,10 +77,12 @@ public class Frame implements WindowListener {
     private static JTextField GPUScores;
     private static float GPUScore;
     private static JTextField Battery;
+    private static JComboBox<String> ScreenSize;
     private static final String[] ScreenSizes = {"7\"", "7.9\"", "8\"", "8.9\"", "9\"", "10\"", "10.1\"", "11\"", "11.6\"", "12\"", "12.1\"", "12.5\"",
             "13\"", "13.1\"", "13.3\"", "14\"", "14.1\"", "14.5\"", "15\"", "15.1\"", "15.4\"", "15.5\"", "15.6\"", "16\"", "16.4\"", "17\"",
             "17.1\"", "17.3\"", "18\"", "18.4\"", "18.5\"", "19\"", "19.5\"", "20\"", "20.1\"", "21\"", "21.5\"", "22\"", "23\"", "23.6\"",
             "24\"", "25\"", "26\"", "27\"", "28\"", "Other", "NA"};
+    private static JComboBox<String> ScreenType;
     private static final String[] ScreenTypes = {"LCD", "LED", "LCD Touchscreen", "LED Touchscreen"};
     private static JLabel updating;
     private static boolean Updating = true;
@@ -105,9 +107,11 @@ public class Frame implements WindowListener {
         //Defines the Y location for os info line
         final int OSY = 220;
         //Defines the Y location for the scores line
-        final int ScY = 250;
+        final int ScoY = 250;
         //Defines the Y location for the battery line
         final int BatY = 280;
+        //Defines the Y location for the screen line
+        final int ScrY = 310;
 
         if(Main.isVerbose()){System.out.println("Building frame and adding componets.");}
 
@@ -250,27 +254,27 @@ public class Frame implements WindowListener {
 
         //--------------------Scores------------------
         JLabel Scoresl = new JLabel("Scores");
-        Scoresl.setBounds(15,ScY,50,Height);
+        Scoresl.setBounds(15,ScoY,50,Height);
         panel.add(Scoresl);
         Scoresl.setVisible(true);
 
         JLabel ScoreCPUl = new JLabel("CPU:");
-        ScoreCPUl.setBounds(69,ScY,30,Height);
+        ScoreCPUl.setBounds(69,ScoY,30,Height);
         panel.add(ScoreCPUl);
         ScoreCPUl.setVisible(true);
 
         CPUScores = new JTextField();
-        CPUScores.setBounds(103,ScY,77,Height);
+        CPUScores.setBounds(103,ScoY,77,Height);
         panel.add(CPUScores);
         CPUScores.setVisible(true);
 
         JLabel ScoreGPU = new JLabel("GPU:");
-        ScoreGPU.setBounds(185,ScY,30,Height);
+        ScoreGPU.setBounds(185,ScoY,30,Height);
         panel.add(ScoreGPU);
         ScoreGPU.setVisible(true);
 
         GPUScores = new JTextField();
-        GPUScores.setBounds(220,ScY,80,Height);
+        GPUScores.setBounds(220,ScoY,80,Height);
         panel.add(GPUScores);
         GPUScores.setVisible(true);
 
@@ -284,6 +288,14 @@ public class Frame implements WindowListener {
         Battery.setBounds(70, BatY, 230, Height);
         panel.add(Battery);
         Battery.setVisible(true);
+
+        //--------------------Screen------------------
+        JLabel Screenl = new JLabel("Screen");
+        Screenl.setBounds(15,ScrY, 50,Height);
+        panel.add(Screenl);
+
+        ScreenSize = new JComboBox<>(ScreenSizes);
+        ScreenSize.setBounds();
 
         //--------------------Status------------------
         updating = new JLabel("Retrieving System Info. Please wait.");
