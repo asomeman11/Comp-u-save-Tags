@@ -34,6 +34,7 @@ public class Frame implements WindowListener {
 
     Frame(){
         FrameInit();
+        BuildFrame();
     }
 
     /*
@@ -51,7 +52,6 @@ public class Frame implements WindowListener {
         panel.setLayout(null);
         frame.add(panel);
         if (Main.isVerbose()) {System.out.println("Frame Initilized");}
-        BuildFrame();
     }
 
     //Building the JFrame structure.
@@ -78,12 +78,17 @@ public class Frame implements WindowListener {
     private static float GPUScore;
     private static JTextField Battery;
     private static JComboBox<String> ScreenSize;
-    private static final String[] ScreenSizes = {"7\"", "7.9\"", "8\"", "8.9\"", "9\"", "10\"", "10.1\"", "11\"", "11.6\"", "12\"", "12.1\"", "12.5\"",
+    private static final String[] ScreenSizes = {"Size","7\"", "7.9\"", "8\"", "8.9\"", "9\"", "10\"", "10.1\"", "11\"", "11.6\"", "12\"", "12.1\"", "12.5\"",
             "13\"", "13.1\"", "13.3\"", "14\"", "14.1\"", "14.5\"", "15\"", "15.1\"", "15.4\"", "15.5\"", "15.6\"", "16\"", "16.4\"", "17\"",
             "17.1\"", "17.3\"", "18\"", "18.4\"", "18.5\"", "19\"", "19.5\"", "20\"", "20.1\"", "21\"", "21.5\"", "22\"", "23\"", "23.6\"",
             "24\"", "25\"", "26\"", "27\"", "28\"", "Other", "NA"};
     private static JComboBox<String> ScreenType;
-    private static final String[] ScreenTypes = {"LCD", "LED", "LCD Touchscreen", "LED Touchscreen"};
+    private static final String[] ScreenTypes = {"Type","LCD", "LED", "LCD Touchscreen", "LED Touchscreen"};
+    private static JComboBox<String> ScreenRefRate;
+    private static final String[] RefRates = {"60Hz","75Hz","144Hz","240Hz"};
+    private static JTextField Price;
+    private static final String[] conditons = {"Refurbished","New"};
+    private static JComboBox<String> Condition;
     private static JLabel updating;
     private static boolean Updating = true;
 
@@ -112,7 +117,14 @@ public class Frame implements WindowListener {
         final int BatY = 280;
         //Defines the Y location for the screen line
         final int ScrY = 310;
-
+        //Defines the Y location for the price line
+        final int PrY = 340;
+        //Defines the Y location for the conditions line
+        final int ConY = 370;
+        //Defines the Y location for the warranty line
+        final int WarY = 400;
+        //Defines the Y location for the notes line
+        final int NotY = 430;
         if(Main.isVerbose()){System.out.println("Building frame and adding componets.");}
 
         //-----------------Model--------------------
@@ -126,7 +138,6 @@ public class Frame implements WindowListener {
         Model.setBounds(70,ModelY,230,Height);
         panel.add(Model);
         Model.setVisible(true);
-
 
         //-----------------CPU--------------------
         final JLabel CPUL = new JLabel("CPU");
@@ -193,6 +204,7 @@ public class Frame implements WindowListener {
         DriveSize2 = new JTextField("Size");
         DriveSize2.setToolTipText("Drive 2 Size");
         DriveSize2.setBounds(70,D2Y,110,Height);
+        DriveSize2.setEditable(false);
         panel.add(DriveSize2);
         DriveSize2.setVisible(true);
 
@@ -206,7 +218,13 @@ public class Frame implements WindowListener {
         DriveType2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                System.out.println(DriveType2.getSelectedItem().toString());
+                if (!(DriveType2.getSelectedItem().toString().toUpperCase() == "NONE") || !(DriveType2.getSelectedItem().toString().toUpperCase() == "Select")){
+                    DriveSize2.setEditable(true);
+                }
+                if ((DriveType2.getSelectedItem().toString().toUpperCase() == "NONE") || !(DriveType2.getSelectedItem().toString().toUpperCase() == "Select")){
+                    DriveSize2.setEditable(false);
+                }
             }
         });
         panel.add(DriveType2);
@@ -295,14 +313,47 @@ public class Frame implements WindowListener {
         panel.add(Screenl);
 
         ScreenSize = new JComboBox<>(ScreenSizes);
-        ScreenSize.setBounds();
+        ScreenSize.setBounds(70, ScrY, 64,Height);
+        panel.add(ScreenSize);
+        ScreenSize.setVisible(true);
+
+        ScreenType = new JComboBox<>(ScreenTypes);
+        ScreenType.setBounds(135,ScrY,100,Height);
+        panel.add(ScreenType);
+        ScreenType.setVisible(true);
+
+        ScreenRefRate = new JComboBox<>(RefRates);
+        ScreenRefRate.setBounds(236,ScrY,63,Height);
+        panel.add(ScreenRefRate);
+        ScreenRefRate.setVisible(true);
+
+        //--------------------Price-------------------
+        JLabel Pricel = new JLabel("Price");
+        Pricel.setBounds(15,PrY,50,Height);
+        panel.add(Pricel);
+        Pricel.setVisible(true);
+
+        Price = new JTextField("Price");
+        Price.setBounds(70,PrY,230,Height);
+        panel.add(Price);
+        Price.setVisible(true);
+
+        //---------------Condition------------------
+        JLabel Conditionl = new JLabel("Condition");
+        Conditionl.setBounds(10,ConY,60,Height);
+        panel.add(Conditionl);
+        Conditionl.setVisible(true);
+
+        Condition = new JComboBox<>(conditons);
+        Condition.setBounds(70,ConY,230,Height);
+        panel.add(Condition);
+        Condition.setVisible(true);
 
         //--------------------Status------------------
         updating = new JLabel("Retrieving System Info. Please wait.");
         updating.setBounds(300,500,400,Height);
         panel.add(updating);
         updating.setVisible(Updating);
-
 
         if(Main.isVerbose()){System.out.println("Componets added to frame");}
         frame.setVisible(true);
