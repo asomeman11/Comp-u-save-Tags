@@ -28,13 +28,14 @@ TODO backlit keyboard
 public class Frame implements WindowListener {
 
     public static JFrame frame;
-    private static final Dimension size = new Dimension(900,600);
+    private static final Dimension size = new Dimension(800,550);
     private static Panel panel;
     private static ImageIcon Icon;
 
     Frame(){
         FrameInit();
-        BuildFrame();
+        BuildFrameSpecs();
+        BuildFrameChecks();
     }
 
     /*
@@ -56,43 +57,48 @@ public class Frame implements WindowListener {
 
     //Building the JFrame structure.
 
-    private static JTextField Model;
-    private static JTextField CPU;
-    private static JTextField Mem;
+    public static JTextField Model;
+    public static JTextField CPU;
+    public static JTextField Mem;
     private static final String[] MemTypes = {"Select","DDR","DDR2","DDR3","DDR3L","DDR4","DDR5","ECC"};
-    private static JComboBox<String> MemType;
-    private static JTextField OS;
-    private static JTextField GPU;
-    private static JTextField DriveSize1;
-    private static JTextField DriveSize2;
-    private static JComboBox<String> DriveType1;
-    private static JComboBox<String> DriveType2;
+    public static JComboBox<String> MemType;
+    public static JTextField OS;
+    public static JTextField GPU;
+    public static JTextField DriveSize1;
+    public static JTextField DriveSize2;
+    public static JComboBox<String> DriveType1;
+    public static JComboBox<String> DriveType2;
     private static final String[] DriveTypes = {"Select","None","HDD","SSD","M.2","NVMe","mSata","SSHD"};
     private static final String[] DVDtypes = {"None","CD Player","DVD Player","CD Burner",
             "Combo","DVD Burner","Blu-Ray Player","Blu-Ray Combo","Blu-Ray Burner"};
-    private static JComboBox<String> diskDrive1;
-    private static JComboBox<String> diskDrive2;
-    private static JTextField CPUScores;
-    private static float CPUScore;
-    private static JTextField GPUScores;
-    private static float GPUScore;
-    private static JTextField Battery;
-    private static JComboBox<String> ScreenSize;
+    public static JComboBox<String> diskDrive1;
+    public static JComboBox<String> diskDrive2;
+    public static JTextField CPUScores;
+    public static float CPUScore;
+    public static JTextField GPUScores;
+    public static float GPUScore;
+    public static JTextField Battery;
+    public static JComboBox<String> ScreenSize;
     private static final String[] ScreenSizes = {"Size","7\"", "7.9\"", "8\"", "8.9\"", "9\"", "10\"", "10.1\"", "11\"", "11.6\"", "12\"", "12.1\"", "12.5\"",
             "13\"", "13.1\"", "13.3\"", "14\"", "14.1\"", "14.5\"", "15\"", "15.1\"", "15.4\"", "15.5\"", "15.6\"", "16\"", "16.4\"", "17\"",
             "17.1\"", "17.3\"", "18\"", "18.4\"", "18.5\"", "19\"", "19.5\"", "20\"", "20.1\"", "21\"", "21.5\"", "22\"", "23\"", "23.6\"",
             "24\"", "25\"", "26\"", "27\"", "28\"", "Other", "NA"};
-    private static JComboBox<String> ScreenType;
+    public static JComboBox<String> ScreenType;
     private static final String[] ScreenTypes = {"Type","LCD", "LED", "LCD Touchscreen", "LED Touchscreen"};
-    private static JComboBox<String> ScreenRefRate;
+    public static JComboBox<String> ScreenRefRate;
     private static final String[] RefRates = {"60Hz","75Hz","144Hz","240Hz"};
-    private static JTextField Price;
+    public static JTextField Price;
     private static final String[] conditons = {"Refurbished","New"};
-    private static JComboBox<String> Condition;
+    public static JComboBox<String> Condition;
+    private static final String[] lawars = {"Labor", "90 Days", "1 Year", "2 Years", "3 Years"};
+    private static final String[] parwars = {"Parts", "90 Days", "1 Year", "2 Years", "3 Years"};
+    public static JComboBox<String> lawar;
+    public static JComboBox<String> parwar;
+    public static JTextField Notes;
     private static JLabel updating;
     private static boolean Updating = true;
 
-    private void BuildFrame(){
+    private void BuildFrameSpecs(){
         //Defines the height for all of the componets.
         final int Height = 25;
         //Defines the Y location for the model info
@@ -349,9 +355,36 @@ public class Frame implements WindowListener {
         panel.add(Condition);
         Condition.setVisible(true);
 
+        //---------------Warranty----------------------
+        JLabel war = new JLabel("Warranty");
+        war.setBounds(10,WarY,60,Height);
+        panel.add(war);
+        war.setVisible(true);
+
+        parwar = new JComboBox<>(parwars);
+        parwar.setBounds(70,WarY,110,Height);
+        panel.add(parwar);
+        parwar.setVisible(true);
+
+        lawar = new JComboBox<>(lawars);
+        lawar.setBounds(190,WarY,110,Height);
+        panel.add(lawar);
+        lawar.setVisible(true);
+
+        //--------------------Notes-------------------
+        JLabel Notesl = new JLabel("Notes");
+        Notesl.setBounds(15,NotY,50,Height);
+        panel.add(Notesl);
+        Notesl.setVisible(true);
+
+        Notes = new JTextField("Notes");
+        Notes.setBounds(70, NotY,230,Height);
+        panel.add(Notes);
+        Notes.setVisible(true);
+
         //--------------------Status------------------
         updating = new JLabel("Retrieving System Info. Please wait.");
-        updating.setBounds(300,500,400,Height);
+        updating.setBounds(300,475,300,Height);
         panel.add(updating);
         updating.setVisible(Updating);
 
@@ -359,6 +392,100 @@ public class Frame implements WindowListener {
         frame.setVisible(true);
         if(Main.isVerbose()){System.out.println("Frame set to visible");}
 
+    }
+
+    public static JButton Submit;
+    public static JCheckBox SKU;
+    public static JCheckBox HDD;
+    public static JCheckBox MEM;
+    public static JCheckBox DRI;
+    public static JCheckBox UPD;
+    public static JCheckBox FIN;
+    public static JCheckBox ACT;
+    public static JCheckBox CAP;
+    public static JCheckBox WIP;
+    public static JCheckBox BLO;
+    public static JCheckBox DVD;
+    public static JCheckBox BAT;
+    public static JCheckBox VRM;
+
+    private void BuildFrameChecks(){
+
+        /*
+        Defineing the checkboxes
+         */
+        SKU = new JCheckBox("Has SKU");
+        SKU.setBounds(310, 10, 100, 20);
+        panel.add(SKU);
+        SKU.setVisible(true);
+
+        HDD = new JCheckBox("HDD Test");
+        HDD.setBounds(310, 35, 100, 20);
+        panel.add(HDD);
+        HDD.setVisible(true);
+
+        MEM = new JCheckBox("Mem Test");
+        MEM.setBounds(310,60,100,20);
+        panel.add(MEM);
+        MEM.setVisible(true);
+
+        DRI = new JCheckBox("Drivers");
+        DRI.setBounds(310,85,100,20);
+        panel.add(DRI);
+        DRI.setVisible(true);
+
+        UPD = new JCheckBox("Updates");
+        UPD.setBounds(310,110,100,20);
+        panel.add(UPD);
+        UPD.setVisible(true);
+
+        FIN = new JCheckBox("Finisher");
+        FIN.setBounds(310,135,100,20);
+        panel.add(FIN);
+        FIN.setVisible(true);
+
+        ACT = new JCheckBox("Activated");
+        ACT.setBounds(310,160,100,20);
+        panel.add(ACT);
+        ACT.setVisible(true);
+
+        CAP = new JCheckBox("Capacitors");
+        CAP.setBounds(310,185,100,20);
+        panel.add(CAP);
+        CAP.setVisible(true);
+
+        WIP = new JCheckBox("Wipe Down");
+        WIP.setBounds(310,210,100,20);
+        panel.add(WIP);
+        WIP.setVisible(true);
+
+        BLO = new JCheckBox("Blow Out");
+        BLO.setBounds(310,235,100,20);
+        panel.add(BLO);
+        BLO.setVisible(true);
+
+        DVD = new JCheckBox("Check DVD");
+        DVD.setBounds(310,260,100,20);
+        panel.add(DVD);
+        DVD.setVisible(true);
+
+        BAT = new JCheckBox("Battery Test");
+        BAT.setBounds(310,285,100,20);
+        panel.add(BAT);
+        BAT.setVisible(true);
+
+        //----------------------Submit--------------------
+        Submit = new JButton();
+        Submit.setBounds(625,400,90,30);
+        Submit.setText("Submit");
+        panel.add(Submit);
+        Submit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Submit();
+            }
+        });
+        Submit.setVisible(true);
     }
 
 

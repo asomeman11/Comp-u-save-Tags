@@ -42,10 +42,10 @@ public class Main {
         }
        new Frame();
        System.out.println("Retrieving System Info");
-       GetSysInfo();
-       Frame.updateFrame(getOS(), getCPU(), Math.round(getMemory() / 1073741824), getGPU());
-       CMD = new Thread();
-       CMD.start();
+       //GetSysInfo();
+       //Frame.updateFrame(getOS(), getCPU(), Math.round(getMemory() / 1073741824), getGPU());
+       //CMD = new Thread();
+       //CMD.start();
     }
 
     public static void Stop(){

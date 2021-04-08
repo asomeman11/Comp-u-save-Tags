@@ -4,7 +4,7 @@ import com.compusave.tags.Main;
 
 import java.util.Scanner;
 
-public class Cmd implements Runnable{
+public class Cmd implements Runnable {
 
     public static void cmdIN(){
         Scanner in = new Scanner(System.in);
