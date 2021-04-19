@@ -395,6 +395,7 @@ public class Frame implements WindowListener {
     }
 
     public static JButton Submit;
+    public static JButton DEBUG;
     public static JCheckBox SKU;
     public static JCheckBox HDD;
     public static JCheckBox MEM;
@@ -414,69 +415,81 @@ public class Frame implements WindowListener {
         /*
         Defineing the checkboxes
          */
+
+        BAT = new JCheckBox("Battery Test");
+        BAT.setBounds(310,10,100,20);
+        panel.add(BAT);
+        BAT.setVisible(true);
+
         SKU = new JCheckBox("Has SKU");
-        SKU.setBounds(310, 10, 100, 20);
+        SKU.setBounds(310, 35, 100, 20);
         panel.add(SKU);
         SKU.setVisible(true);
 
         HDD = new JCheckBox("HDD Test");
-        HDD.setBounds(310, 35, 100, 20);
+        HDD.setBounds(310, 60, 100, 20);
         panel.add(HDD);
         HDD.setVisible(true);
 
         MEM = new JCheckBox("Mem Test");
-        MEM.setBounds(310,60,100,20);
+        MEM.setBounds(310,85,100,20);
         panel.add(MEM);
         MEM.setVisible(true);
 
         DRI = new JCheckBox("Drivers");
-        DRI.setBounds(310,85,100,20);
+        DRI.setBounds(310,110,100,20);
         panel.add(DRI);
         DRI.setVisible(true);
 
         UPD = new JCheckBox("Updates");
-        UPD.setBounds(310,110,100,20);
+        UPD.setBounds(310,135,100,20);
         panel.add(UPD);
         UPD.setVisible(true);
 
         FIN = new JCheckBox("Finisher");
-        FIN.setBounds(310,135,100,20);
+        FIN.setBounds(310,160,100,20);
         panel.add(FIN);
         FIN.setVisible(true);
 
         ACT = new JCheckBox("Activated");
-        ACT.setBounds(310,160,100,20);
+        ACT.setBounds(310,185,100,20);
         panel.add(ACT);
         ACT.setVisible(true);
 
+        VRM = new JCheckBox("VRAM Check");
+        VRM.setBounds(310,210,100,20);
+        panel.add(VRM);
+        VRM.setVisible(true);
+
+        DVD = new JCheckBox("Check DVD");
+        DVD.setBounds(310,235,100,20);
+        panel.add(DVD);
+        DVD.setVisible(true);
+
         CAP = new JCheckBox("Capacitors");
-        CAP.setBounds(310,185,100,20);
+        CAP.setBounds(310,260,100,20);
         panel.add(CAP);
         CAP.setVisible(true);
 
         WIP = new JCheckBox("Wipe Down");
-        WIP.setBounds(310,210,100,20);
+        WIP.setBounds(310,285,100,20);
         panel.add(WIP);
         WIP.setVisible(true);
 
         BLO = new JCheckBox("Blow Out");
-        BLO.setBounds(310,235,100,20);
+        BLO.setBounds(310,310,100,20);
         panel.add(BLO);
         BLO.setVisible(true);
 
-        DVD = new JCheckBox("Check DVD");
-        DVD.setBounds(310,260,100,20);
-        panel.add(DVD);
-        DVD.setVisible(true);
+        DEBUG = new JButton("Debug");
+        DEBUG.setBounds(670,425,90,30);
+        panel.add(DEBUG);
+        DEBUG.setVisible(true);
 
-        BAT = new JCheckBox("Battery Test");
-        BAT.setBounds(310,285,100,20);
-        panel.add(BAT);
-        BAT.setVisible(true);
 
         //----------------------Submit--------------------
         Submit = new JButton();
-        Submit.setBounds(625,400,90,30);
+        Submit.setBounds(575,425,90,30);
         Submit.setText("Submit");
         panel.add(Submit);
         Submit.addActionListener(new ActionListener() {
