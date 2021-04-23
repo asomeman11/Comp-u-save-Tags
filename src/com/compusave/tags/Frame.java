@@ -385,11 +385,12 @@ public class Frame implements WindowListener {
 
     }
 
+    public static JButton Submit;
     public static JCheckBox SKU;
     public static JCheckBox HDD;
     public static JCheckBox MEM;
     public static JCheckBox DRI;
-    public static JCheckBox UPD;;
+    public static JCheckBox UPD;
     public static JCheckBox FIN;
     public static JCheckBox ACT;
     public static JCheckBox CAP;
@@ -398,7 +399,6 @@ public class Frame implements WindowListener {
     public static JCheckBox DVD;
     public static JCheckBox BAT;
     public static JCheckBox VRM;
-    public static JButton Submit;
     public static JButton Debug;
 
     private void BuildFrameChecks(){
@@ -410,6 +410,12 @@ public class Frame implements WindowListener {
         /*
         Defineing the checkboxes
          */
+
+        BAT = new JCheckBox("Battery Test");
+        BAT.setBounds(310,10,100,20);
+        panel.add(BAT);
+        BAT.setVisible(true);
+
         SKU = new JCheckBox("Has SKU");
         SKU.setBounds(ChY, 10, ChW, ChH);
         panel.add(SKU);
@@ -445,6 +451,16 @@ public class Frame implements WindowListener {
         panel.add(ACT);
         ACT.setVisible(true);
 
+        VRM = new JCheckBox("VRAM Check");
+        VRM.setBounds(310,210,100,20);
+        panel.add(VRM);
+        VRM.setVisible(true);
+
+        DVD = new JCheckBox("Check DVD");
+        DVD.setBounds(310,235,100,20);
+        panel.add(DVD);
+        DVD.setVisible(true);
+
         CAP = new JCheckBox("Capacitors");
         CAP.setBounds(ChY,185,ChW,ChH);
         panel.add(CAP);
@@ -477,7 +493,7 @@ public class Frame implements WindowListener {
 
         //----------------------Submit--------------------
         Submit = new JButton();
-        Submit.setBounds(575,420,80,30);
+        Submit.setBounds(575,425,90,30);
         Submit.setText("Submit");
         panel.add(Submit);
         Submit.addActionListener(new ActionListener() {
