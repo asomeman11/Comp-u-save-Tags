@@ -5,10 +5,7 @@ import com.compusave.tags.Exceptions.InvalidGPUException;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 
 /*
 TODO Fix windows closing operation to properly end profram execution.
@@ -221,16 +218,10 @@ public class Frame implements WindowListener {
 
         DriveType2 = new JComboBox<String>(DriveTypes);
         DriveType2.setBounds(234,D2Y,65,Height);
-        DriveType2.addActionListener(new ActionListener() {
+        DriveType2.addItemListener(new ItemListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println(DriveType2.getSelectedItem().toString());
-                if (!(DriveType2.getSelectedItem().toString().toUpperCase() == "NONE") || !(DriveType2.getSelectedItem().toString().toUpperCase() == "Select")){
-                    DriveSize2.setEditable(true);
-                }
-                if ((DriveType2.getSelectedItem().toString().toUpperCase() == "NONE") || !(DriveType2.getSelectedItem().toString().toUpperCase() == "Select")){
-                    DriveSize2.setEditable(false);
-                }
+            public void itemStateChanged(ItemEvent e) {
+                System.out.println(e.getItem().toString());
             }
         });
         panel.add(DriveType2);
@@ -394,12 +385,11 @@ public class Frame implements WindowListener {
 
     }
 
-    public static JButton Submit;
     public static JCheckBox SKU;
     public static JCheckBox HDD;
     public static JCheckBox MEM;
     public static JCheckBox DRI;
-    public static JCheckBox UPD;
+    public static JCheckBox UPD;;
     public static JCheckBox FIN;
     public static JCheckBox ACT;
     public static JCheckBox CAP;
@@ -408,85 +398,113 @@ public class Frame implements WindowListener {
     public static JCheckBox DVD;
     public static JCheckBox BAT;
     public static JCheckBox VRM;
+    public static JButton Submit;
+    public static JButton Debug;
 
     private void BuildFrameChecks(){
+
+        final int ChW = 115;
+        final int ChH = 20;
+        final int ChY = 310;
 
         /*
         Defineing the checkboxes
          */
         SKU = new JCheckBox("Has SKU");
-        SKU.setBounds(310, 10, 100, 20);
+        SKU.setBounds(ChY, 10, ChW, ChH);
         panel.add(SKU);
         SKU.setVisible(true);
 
         HDD = new JCheckBox("HDD Test");
-        HDD.setBounds(310, 35, 100, 20);
+        HDD.setBounds(ChY, 35, ChW, ChH);
         panel.add(HDD);
         HDD.setVisible(true);
 
         MEM = new JCheckBox("Mem Test");
-        MEM.setBounds(310,60,100,20);
+        MEM.setBounds(ChY,60,ChW,ChH);
         panel.add(MEM);
         MEM.setVisible(true);
 
         DRI = new JCheckBox("Drivers");
-        DRI.setBounds(310,85,100,20);
+        DRI.setBounds(ChY,85,ChW,ChH);
         panel.add(DRI);
         DRI.setVisible(true);
 
         UPD = new JCheckBox("Updates");
-        UPD.setBounds(310,110,100,20);
+        UPD.setBounds(ChY,110,ChW,ChH);
         panel.add(UPD);
         UPD.setVisible(true);
 
         FIN = new JCheckBox("Finisher");
-        FIN.setBounds(310,135,100,20);
+        FIN.setBounds(ChY,135,ChW,ChH);
         panel.add(FIN);
         FIN.setVisible(true);
 
         ACT = new JCheckBox("Activated");
-        ACT.setBounds(310,160,100,20);
+        ACT.setBounds(ChY,160,ChW,ChH);
         panel.add(ACT);
         ACT.setVisible(true);
 
         CAP = new JCheckBox("Capacitors");
-        CAP.setBounds(310,185,100,20);
+        CAP.setBounds(ChY,185,ChW,ChH);
         panel.add(CAP);
         CAP.setVisible(true);
 
         WIP = new JCheckBox("Wipe Down");
-        WIP.setBounds(310,210,100,20);
+        WIP.setBounds(ChY,210,ChW,ChH);
         panel.add(WIP);
         WIP.setVisible(true);
 
         BLO = new JCheckBox("Blow Out");
-        BLO.setBounds(310,235,100,20);
+        BLO.setBounds(ChY,235,ChW,ChH);
         panel.add(BLO);
         BLO.setVisible(true);
 
         DVD = new JCheckBox("Check DVD");
-        DVD.setBounds(310,260,100,20);
+        DVD.setBounds(ChY,260,ChW,ChH);
         panel.add(DVD);
         DVD.setVisible(true);
 
         BAT = new JCheckBox("Battery Test");
-        BAT.setBounds(310,285,100,20);
+        BAT.setBounds(ChY,285,ChW,ChH);
         panel.add(BAT);
         BAT.setVisible(true);
 
+        VRM = new JCheckBox("VRAM Checked");
+        VRM.setBounds(ChY,310,ChW,ChH);
+        panel.add(VRM);
+        VRM.setVisible(true);
+
         //----------------------Submit--------------------
         Submit = new JButton();
-        Submit.setBounds(625,400,90,30);
+        Submit.setBounds(575,420,80,30);
         Submit.setText("Submit");
         panel.add(Submit);
         Submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Submit();
+                Object[] Sysinfo = new Object[] {Model.getText(),CPU.getText(),Mem.getText() + " " + MemType.getSelectedItem(),GPU.getText(),OS.getText(),
+                        DriveSize1.getText() + " " + DriveType1.getSelectedItem(),DriveSize2.getText() + " " + DriveType2.getSelectedItem(),diskDrive1.getSelectedItem(),diskDrive2.getSelectedItem(),
+                        CPUScores.getText(),GPUScores.getText(),Battery.getText(),ScreenSize.getSelectedItem(), ScreenType.getSelectedItem(), ScreenRefRate.getSelectedItem(),
+                        Price.getText(),Condition.getSelectedItem(),lawar.getSelectedItem(),parwar.getSelectedItem(),Notes.getText()};
+                new Submit(Sysinfo);
             }
         });
         Submit.setVisible(true);
+
+    //------------------------Debug----------------------
+        Debug = new JButton("Debug");
+        Debug.setBounds(680,420,90,30);
+        panel.add(Debug);
+        Debug.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Debug button test");
+            }
+        });
+        Debug.setVisible(true);
     }
+
 
 
     /*
