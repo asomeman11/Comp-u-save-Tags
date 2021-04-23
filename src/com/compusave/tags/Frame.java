@@ -410,90 +410,79 @@ public class Frame implements WindowListener {
         /*
         Defineing the checkboxes
          */
-
         BAT = new JCheckBox("Battery Test");
-        BAT.setBounds(310,10,100,20);
+        BAT.setBounds(ChY,10, ChW, ChH);
         panel.add(BAT);
         BAT.setVisible(true);
 
         SKU = new JCheckBox("Has SKU");
-        SKU.setBounds(ChY, 10, ChW, ChH);
+        SKU.setBounds(ChY, 35, ChW, ChH);
         panel.add(SKU);
         SKU.setVisible(true);
 
         HDD = new JCheckBox("HDD Test");
-        HDD.setBounds(ChY, 35, ChW, ChH);
+        HDD.setBounds(ChY, 60, ChW, ChH);
         panel.add(HDD);
         HDD.setVisible(true);
 
         MEM = new JCheckBox("Mem Test");
-        MEM.setBounds(ChY,60,ChW,ChH);
+        MEM.setBounds(ChY,85,ChW,ChH);
         panel.add(MEM);
         MEM.setVisible(true);
 
         DRI = new JCheckBox("Drivers");
-        DRI.setBounds(ChY,85,ChW,ChH);
+        DRI.setBounds(ChY,110,ChW,ChH);
         panel.add(DRI);
         DRI.setVisible(true);
 
         UPD = new JCheckBox("Updates");
-        UPD.setBounds(ChY,110,ChW,ChH);
+        UPD.setBounds(ChY,135,ChW,ChH);
         panel.add(UPD);
         UPD.setVisible(true);
 
         FIN = new JCheckBox("Finisher");
-        FIN.setBounds(ChY,135,ChW,ChH);
+        FIN.setBounds(ChY,160,ChW,ChH);
         panel.add(FIN);
         FIN.setVisible(true);
 
         ACT = new JCheckBox("Activated");
-        ACT.setBounds(ChY,160,ChW,ChH);
+        ACT.setBounds(ChY,185,ChW,ChH);
         panel.add(ACT);
         ACT.setVisible(true);
 
-        VRM = new JCheckBox("VRAM Check");
-        VRM.setBounds(310,210,100,20);
-        panel.add(VRM);
-        VRM.setVisible(true);
-
-        DVD = new JCheckBox("Check DVD");
-        DVD.setBounds(310,235,100,20);
-        panel.add(DVD);
-        DVD.setVisible(true);
-
         CAP = new JCheckBox("Capacitors");
-        CAP.setBounds(ChY,185,ChW,ChH);
+        CAP.setBounds(ChY,210,ChW,ChH);
         panel.add(CAP);
         CAP.setVisible(true);
 
         WIP = new JCheckBox("Wipe Down");
-        WIP.setBounds(ChY,210,ChW,ChH);
+        WIP.setBounds(ChY,235,ChW,ChH);
         panel.add(WIP);
         WIP.setVisible(true);
 
         BLO = new JCheckBox("Blow Out");
-        BLO.setBounds(ChY,235,ChW,ChH);
+        BLO.setBounds(ChY,260,ChW,ChH);
         panel.add(BLO);
         BLO.setVisible(true);
 
         DVD = new JCheckBox("Check DVD");
-        DVD.setBounds(ChY,260,ChW,ChH);
+        DVD.setBounds(ChY,285,ChW,ChH);
         panel.add(DVD);
         DVD.setVisible(true);
 
         BAT = new JCheckBox("Battery Test");
-        BAT.setBounds(ChY,285,ChW,ChH);
+        BAT.setBounds(ChY,310,ChW,ChH);
         panel.add(BAT);
         BAT.setVisible(true);
 
         VRM = new JCheckBox("VRAM Checked");
-        VRM.setBounds(ChY,310,ChW,ChH);
+        VRM.setBounds(ChY,335,ChW,ChH);
         panel.add(VRM);
         VRM.setVisible(true);
 
         //----------------------Submit--------------------
         Submit = new JButton();
-        Submit.setBounds(575,425,90,30);
+        Submit.setBounds(570,425,90,30);
         Submit.setText("Submit");
         panel.add(Submit);
         Submit.addActionListener(new ActionListener() {
@@ -510,7 +499,7 @@ public class Frame implements WindowListener {
 
     //------------------------Debug----------------------
         Debug = new JButton("Debug");
-        Debug.setBounds(680,420,90,30);
+        Debug.setBounds(680,425,90,30);
         panel.add(Debug);
         Debug.addActionListener(new ActionListener() {
             @Override
