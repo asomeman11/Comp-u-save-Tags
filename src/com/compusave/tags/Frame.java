@@ -33,6 +33,7 @@ public class Frame implements WindowListener {
         FrameInit();
         BuildFrameSpecs();
         BuildFrameChecks();
+        BuildFramePorts();
     }
 
     /*
@@ -83,7 +84,7 @@ public class Frame implements WindowListener {
     public static JComboBox<String> ScreenType;
     private static final String[] ScreenTypes = {"Type","LCD", "LED", "LCD Touchscreen", "LED Touchscreen"};
     public static JComboBox<String> ScreenRefRate;
-    private static final String[] RefRates = {"60Hz","75Hz","144Hz","240Hz"};
+    private static final String[] RefRates = {"60Hz","75Hz","120Hz","144Hz","240Hz"};
     public static JTextField Price;
     private static final String[] conditons = {"Refurbished","New"};
     public static JComboBox<String> Condition;
@@ -405,78 +406,78 @@ public class Frame implements WindowListener {
 
         final int ChW = 115;
         final int ChH = 20;
-        final int ChY = 310;
+        final int ChX = 310;
 
         /*
         Defineing the checkboxes
          */
         BAT = new JCheckBox("Battery Test");
-        BAT.setBounds(ChY,10, ChW, ChH);
+        BAT.setBounds(ChX,10, ChW, ChH);
         panel.add(BAT);
         BAT.setVisible(true);
 
         SKU = new JCheckBox("Has SKU");
-        SKU.setBounds(ChY, 35, ChW, ChH);
+        SKU.setBounds(ChX, 35, ChW, ChH);
         panel.add(SKU);
         SKU.setVisible(true);
 
         HDD = new JCheckBox("HDD Test");
-        HDD.setBounds(ChY, 60, ChW, ChH);
+        HDD.setBounds(ChX, 60, ChW, ChH);
         panel.add(HDD);
         HDD.setVisible(true);
 
         MEM = new JCheckBox("Mem Test");
-        MEM.setBounds(ChY,85,ChW,ChH);
+        MEM.setBounds(ChX,85,ChW,ChH);
         panel.add(MEM);
         MEM.setVisible(true);
 
         DRI = new JCheckBox("Drivers");
-        DRI.setBounds(ChY,110,ChW,ChH);
+        DRI.setBounds(ChX,110,ChW,ChH);
         panel.add(DRI);
         DRI.setVisible(true);
 
         UPD = new JCheckBox("Updates");
-        UPD.setBounds(ChY,135,ChW,ChH);
+        UPD.setBounds(ChX,135,ChW,ChH);
         panel.add(UPD);
         UPD.setVisible(true);
 
         FIN = new JCheckBox("Finisher");
-        FIN.setBounds(ChY,160,ChW,ChH);
+        FIN.setBounds(ChX,160,ChW,ChH);
         panel.add(FIN);
         FIN.setVisible(true);
 
         ACT = new JCheckBox("Activated");
-        ACT.setBounds(ChY,185,ChW,ChH);
+        ACT.setBounds(ChX,185,ChW,ChH);
         panel.add(ACT);
         ACT.setVisible(true);
 
         CAP = new JCheckBox("Capacitors");
-        CAP.setBounds(ChY,210,ChW,ChH);
+        CAP.setBounds(ChX,210,ChW,ChH);
         panel.add(CAP);
         CAP.setVisible(true);
 
         WIP = new JCheckBox("Wipe Down");
-        WIP.setBounds(ChY,235,ChW,ChH);
+        WIP.setBounds(ChX,235,ChW,ChH);
         panel.add(WIP);
         WIP.setVisible(true);
 
         BLO = new JCheckBox("Blow Out");
-        BLO.setBounds(ChY,260,ChW,ChH);
+        BLO.setBounds(ChX,260,ChW,ChH);
         panel.add(BLO);
         BLO.setVisible(true);
 
         DVD = new JCheckBox("Check DVD");
-        DVD.setBounds(ChY,285,ChW,ChH);
+        DVD.setBounds(ChX,285,ChW,ChH);
         panel.add(DVD);
         DVD.setVisible(true);
 
         BAT = new JCheckBox("Battery Test");
-        BAT.setBounds(ChY,310,ChW,ChH);
+        BAT.setBounds(ChX,310,ChW,ChH);
         panel.add(BAT);
         BAT.setVisible(true);
 
         VRM = new JCheckBox("VRAM Checked");
-        VRM.setBounds(ChY,335,ChW,ChH);
+        VRM.setBounds(ChX,335,ChW,ChH);
         panel.add(VRM);
         VRM.setVisible(true);
 
@@ -510,6 +511,16 @@ public class Frame implements WindowListener {
         Debug.setVisible(true);
     }
 
+    public static JComboBox<String> USBType;
+    public static String[] USBTypes = {"2.0", "3.0"};
+
+    public void BuildFramePorts(){
+        USBType = new JComboBox<String>(USBTypes);
+        USBType.setBounds(680,30,30,20);
+        panel.add(USBType);
+        USBType.setVisible(true);
+        System.out.println("Test");
+    }
 
 
     /*
