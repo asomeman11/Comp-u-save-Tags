@@ -511,14 +511,18 @@ public class Frame implements WindowListener {
         Debug.setVisible(true);
     }
 
-    public static JComboBox<String> USBType;
-    public static String[] USBTypes = {"2.0", "3.0"};
+    public JCheckBox usbtype3;
 
     public void BuildFramePorts(){
-        USBType = new JComboBox<String>(USBTypes);
-        USBType.setBounds(680,30,30,20);
-        panel.add(USBType);
-        USBType.setVisible(true);
+        JLabel PortsL = new JLabel("Ports:");
+        PortsL.setBounds(570,10,50,20);
+        panel.add(PortsL);
+        PortsL.setVisible(true);
+
+        usbtype3 = new JCheckBox("Usb");
+        usbtype3.setBounds(570,25,50,20);
+        panel.add(usbtype3);
+
         System.out.println("Test");
     }
 
