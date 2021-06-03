@@ -34,6 +34,7 @@ public class Frame implements WindowListener {
         BuildFrameSpecs();
         BuildFrameChecks();
         BuildFramePorts();
+        panel.paint(panel.getGraphics());
     }
 
     /*
@@ -50,6 +51,7 @@ public class Frame implements WindowListener {
         panel = new Panel();
         panel.setLayout(null);
         frame.add(panel);
+        panel.paint(panel.getGraphics());
         if (Main.isVerbose()) {System.out.println("Frame Initilized");}
     }
 
@@ -512,6 +514,24 @@ public class Frame implements WindowListener {
     }
 
     public JCheckBox usbtype3;
+    public JCheckBox usbtype2;
+    public JCheckBox usbtypeC;
+    public JCheckBox thunder;
+    public JCheckBox cardread;
+    public JCheckBox firewire;
+
+    public JCheckBox NIC;
+    public JCheckBox wifi;
+    public JCheckBox bluetooth;
+
+    public JCheckBox smartcard;
+    public JCheckBox fingerprint;
+    public JCheckBox blkeys;
+    public JCheckBox webcam;
+
+    public JCheckBox hdmi;
+    public JCheckBox dp;
+
 
     public void BuildFramePorts(){
         JLabel PortsL = new JLabel("Ports:");
@@ -519,9 +539,25 @@ public class Frame implements WindowListener {
         panel.add(PortsL);
         PortsL.setVisible(true);
 
-        usbtype3 = new JCheckBox("Usb");
-        usbtype3.setBounds(570,25,50,20);
+        usbtype2 = new JCheckBox("USB 2");
+        usbtype2.setBounds(570,30,65,15);
+        panel.add(usbtype2);
+
+        usbtype3 = new JCheckBox("USB 3");
+        usbtype3.setBounds(570,50,65,15);
         panel.add(usbtype3);
+
+        usbtypeC = new JCheckBox("USB C");
+        usbtypeC.setBounds(570,70,65,15);
+        panel.add(usbtypeC);
+
+        cardread = new JCheckBox("Card Reader");
+        //cardread.setBounds(570,);
+
+
+        thunder = new JCheckBox("Thunderbolt");
+        thunder.setBounds(570,230,100,15);
+        panel.add(thunder);
 
         System.out.println("Test");
     }
