@@ -9,7 +9,7 @@ public class Submit {
             System.out.println(Sysinfo[x]);
         }
 
-        //new TagOut(Sysinfo);
+        new TagOut(Sysinfo);
 
     }
 }

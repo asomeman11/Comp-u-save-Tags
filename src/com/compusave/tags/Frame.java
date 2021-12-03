@@ -10,30 +10,38 @@ import java.awt.event.*;
 /*
 TODO Fix windows closing operation to properly end profram execution.
 TODO Add more text fields for the system specs.
-TODO Create submit button.
 TODO Make submit button do something.
 TODO Adjust text field Sizes.
-TODO Fix memory readings.
 TODO Get Mac SN
-TODO add option for fingerprint, Smartcard and thunderbolt.
 TODO Add VRAM spot
 TODO Add pro or home option for win OS
-TODO backlit keyboard
  */
 
+
+/*
+The Frame class is the basic setup of the JFrame that will be used to display all infromation and text fields
+This will define how the user is able to interact with the tags frame and the subsequent componet displayed on it.
+@see JFrame
+@see WindowListener
+@See JPanel
+ */
 @SuppressWarnings("all")
 public class Frame implements WindowListener {
 
     public static JFrame frame;
-    private static final Dimension size = new Dimension(800,550);
+    private static final Dimension size = new Dimension(730,550);
     private static Panel panel;
     private static ImageIcon Icon;
 
+    /*
+    This is the main static call for the Frame class. This will be called by the Main class
+    @see Main.class
+     */
     Frame(){
         FrameInit();
         BuildFrameSpecs();
         BuildFrameChecks();
-        BuildFramePorts();
+        BuildFrameFeatures();
         panel.paint(panel.getGraphics());
     }
 
@@ -55,8 +63,9 @@ public class Frame implements WindowListener {
         if (Main.isVerbose()) {System.out.println("Frame Initilized");}
     }
 
-    //Building the JFrame structure.
-
+    /*
+    Building the JFrame structure and componets variables.
+     */
     public static JTextField Model;
     public static JTextField CPU;
     public static JTextField Mem;
@@ -98,6 +107,9 @@ public class Frame implements WindowListener {
     private static JLabel updating;
     private static boolean Updating = true;
 
+    /*
+    Adding the Specs infromation and text fields to the JFrame.
+     */
     private void BuildFrameSpecs(){
         //Defines the height for all of the componets.
         final int Height = 25;
@@ -388,7 +400,9 @@ public class Frame implements WindowListener {
 
     }
 
-    public static JButton Submit;
+    /*
+    Defing variables for the double check boxes
+     */
     public static JCheckBox SKU;
     public static JCheckBox HDD;
     public static JCheckBox MEM;
@@ -402,17 +416,19 @@ public class Frame implements WindowListener {
     public static JCheckBox DVD;
     public static JCheckBox BAT;
     public static JCheckBox VRM;
+    public static JButton passpull;
+    public static JButton Submit;
     public static JButton Debug;
 
+    /*
+        Defineing the checkboxes
+     */
     private void BuildFrameChecks(){
 
         final int ChW = 115;
         final int ChH = 20;
         final int ChX = 310;
 
-        /*
-        Defineing the checkboxes
-         */
         BAT = new JCheckBox("Battery Test");
         BAT.setBounds(ChX,10, ChW, ChH);
         panel.add(BAT);
@@ -483,9 +499,16 @@ public class Frame implements WindowListener {
         panel.add(VRM);
         VRM.setVisible(true);
 
+        //---------------Pull Passmark scores-------------
+        passpull = new JButton();
+        passpull.setBounds(470,395,225,25);
+        passpull.setText("Pull Passmark Scores");
+        panel.add(passpull);
+
+
         //----------------------Submit--------------------
         Submit = new JButton();
-        Submit.setBounds(570,425,90,30);
+        Submit.setBounds(470,425,105,30);
         Submit.setText("Submit");
         panel.add(Submit);
         Submit.addActionListener(new ActionListener() {
@@ -496,13 +519,14 @@ public class Frame implements WindowListener {
                         CPUScores.getText(),GPUScores.getText(),Battery.getText(),ScreenSize.getSelectedItem(), ScreenType.getSelectedItem(), ScreenRefRate.getSelectedItem(),
                         Price.getText(),Condition.getSelectedItem(),lawar.getSelectedItem(),parwar.getSelectedItem(),Notes.getText()};
                 new Submit(Sysinfo);
+                updating.setText("Tag Generated. You may now close the client.");
             }
         });
         Submit.setVisible(true);
 
-    //------------------------Debug----------------------
+        //------------------------Debug----------------------
         Debug = new JButton("Debug");
-        Debug.setBounds(680,425,90,30);
+        Debug.setBounds(590,425,105,30);
         panel.add(Debug);
         Debug.addActionListener(new ActionListener() {
             @Override
@@ -513,51 +537,90 @@ public class Frame implements WindowListener {
         Debug.setVisible(true);
     }
 
+    //Ports
     public JCheckBox usbtype3;
     public JCheckBox usbtype2;
     public JCheckBox usbtypeC;
     public JCheckBox thunder;
     public JCheckBox cardread;
     public JCheckBox firewire;
-
     public JCheckBox NIC;
+    public JCheckBox hdmi;
+    public JCheckBox dp;
+
+    //Features
     public JCheckBox wifi;
     public JCheckBox bluetooth;
-
-    public JCheckBox smartcard;
+    //public JCheckBox smartcard; //this probally wont be a selling point so it is most likely not gonna make it to the full version.
     public JCheckBox fingerprint;
     public JCheckBox blkeys;
     public JCheckBox webcam;
 
-    public JCheckBox hdmi;
-    public JCheckBox dp;
 
 
-    public void BuildFramePorts(){
+    public void BuildFrameFeatures(){
+
+        int w = 100;
+        int x1 = 470; //x location for Ports
+        int x2 = 600; //x location for Features
+
+        //Ports row
+
         JLabel PortsL = new JLabel("Ports:");
-        PortsL.setBounds(570,10,50,20);
+        PortsL.setBounds(x1,10,w,20);
         panel.add(PortsL);
         PortsL.setVisible(true);
 
         usbtype2 = new JCheckBox("USB 2");
-        usbtype2.setBounds(570,30,65,15);
+        usbtype2.setBounds(x1,30,w,15);
         panel.add(usbtype2);
 
         usbtype3 = new JCheckBox("USB 3");
-        usbtype3.setBounds(570,50,65,15);
+        usbtype3.setBounds(x1,50,w,15);
         panel.add(usbtype3);
 
         usbtypeC = new JCheckBox("USB C");
-        usbtypeC.setBounds(570,70,65,15);
+        usbtypeC.setBounds(x1,70,w,15);
         panel.add(usbtypeC);
 
         cardread = new JCheckBox("Card Reader");
-        //cardread.setBounds(570,);
+        cardread.setBounds(x1,90,w,15);
+        panel.add(cardread);
 
+        firewire = new JCheckBox("Firewire");
+        firewire.setBounds(x1,110,w,15);
+        panel.add(firewire);
+
+        NIC = new JCheckBox("NIC");
+        NIC.setBounds(x1,130,w,15);
+        panel.add(NIC);
 
         thunder = new JCheckBox("Thunderbolt");
-        thunder.setBounds(570,230,100,15);
+        thunder.setBounds(x1,150,w,15);
         panel.add(thunder);
+
+        //Features row
+
+        JLabel FeaturesL = new JLabel("Features:");
+        FeaturesL.setBounds(x2,10,w,20);
+        panel.add(FeaturesL);
+
+        wifi = new JCheckBox("WIFI");
+        wifi.setBounds(x2,30,w,15);
+        panel.add(wifi);
+
+        bluetooth = new JCheckBox("Bluetooth");
+        bluetooth.setBounds(x2, 50, w, 15);
+        panel.add(bluetooth);
+
+        fingerprint = new JCheckBox("Fingerprint");
+        fingerprint.setBounds(x2, 70, w, 15);
+        panel.add(fingerprint);
+
+        webcam = new JCheckBox("Webcam");
+        webcam.setBounds(x2,90,w,15);
+        panel.add(webcam);
+
 
         System.out.println("Test");
     }

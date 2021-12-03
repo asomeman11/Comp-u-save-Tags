@@ -6,10 +6,19 @@ import java.util.Scanner;
 
 public class Cmd implements Runnable {
 
+
+
+    //public Cmd(){
+
+    //}
+
+
     public static void cmdIN(){
         Scanner in = new Scanner(System.in);
 
         String[] uin = in.nextLine().toString().toUpperCase().split("");
+        validate(uin);
+
     }
 
     private static void validate(String[] Input){
@@ -43,5 +52,6 @@ public class Cmd implements Runnable {
     @Override
     public void run() {
         cmdIN();
+        System.out.println("cmd run");
     }
 }

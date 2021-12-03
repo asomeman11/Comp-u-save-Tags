@@ -21,6 +21,7 @@ public class Main {
     private static Thread CMD;
 
     public static void main(String[] args){
+
         for (String arg : args) {
             switch (arg.toUpperCase()) {
                 case "DEBUG":
@@ -40,12 +41,14 @@ public class Main {
                     break;
             }
         }
+
+       CMD = new Thread(new Cmd());
+       CMD.start();
        new Frame();
        System.out.println("Retrieving System Info");
        GetSysInfo();
        Frame.updateFrame(getOS(), getCPU(), Math.round(getMemory() / 1073741824), getGPU());
-       //CMD = new Thread();
-       //CMD.start();
+
     }
 
     public static void Stop(){
