@@ -26,7 +26,7 @@ This will define how the user is able to interact with the tags frame and the su
 @See JPanel
  */
 @SuppressWarnings("all")
-public class Frame implements WindowListener {
+public class Frame extends JFrame implements WindowListener {
 
     public static JFrame frame;
     private static final Dimension size = new Dimension(730,550);
@@ -54,6 +54,7 @@ public class Frame implements WindowListener {
         frame.setSize(size);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(this);
         Icon = new ImageIcon(Frame.class.getClassLoader().getResource("TagsIcon32x32.png"));
         frame.setIconImage(Icon.getImage());
         panel = new Panel();
@@ -416,6 +417,10 @@ public class Frame implements WindowListener {
     public static JCheckBox DVD;
     public static JCheckBox BAT;
     public static JCheckBox VRM;
+    public static JLabel TechL;
+    public static String[] Techs = {"Tom", "Erik", "Gerry", "Dave"};
+    public static JComboBox<String> Tech;
+    public static JLabel PWL;
     public static JButton passpull;
     public static JButton Submit;
     public static JButton Debug;
@@ -498,6 +503,23 @@ public class Frame implements WindowListener {
         VRM.setBounds(ChX,335,ChW,ChH);
         panel.add(VRM);
         VRM.setVisible(true);
+
+        TechL = new JLabel("Tech");
+        TechL.setBounds(470, 270,30,25);
+        panel.add(TechL);
+        TechL.setVisible(true);
+
+        Tech = new JComboBox<>(Techs);
+        Tech.setBounds(510,270,70,25);
+        Tech.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(Tech.getSelectedItem());
+            }
+        });
+        panel.add(Tech);
+        Tech.setVisible(true);
+
 
         //---------------Pull Passmark scores-------------
         passpull = new JButton();
@@ -666,31 +688,39 @@ public class Frame implements WindowListener {
         updating.setText("Update complete.");
     }
 
-    //Not Used
+
     @Override
-    public void windowOpened(WindowEvent e) {}
+    public void windowOpened(WindowEvent e) {
 
-    /*
-     Class is used to properly handle the JFrame closing event
-     and shut down any open files and run some finishing commands.
-
-     WARRNING! This class is currently non functional.
-
-     @see WindowListener
-     @see Main.Stop()
-    */
-    @Override
-    public void windowClosing(WindowEvent e) {
-        Main.Stop();
     }
 
     /*
+        //Not Used
+        @Override
+        public void windowOpened(WindowEvent e) {}
+
+
+         Class is used to properly handle the JFrame closing event
+         and shut down any open files and run some finishing commands.
+
+         WARRNING! This class is currently non functional.
+
+         @see WindowListener
+         @see Main.Stop()
+    */
+    @Override
+    public void windowClosing(WindowEvent e) {
+        //Main.Stop();
+    }
+
+/*
     This class is function is overrides the window closed event
     in the WindowListener class that is imported.
     @see WindowListener
-     */
+*/
     @Override
-    public void windowClosed(WindowEvent e) {Main.Stop();}
+    public void windowClosed(WindowEvent e) {//Main.Stop();
+        }
 
     //Not Used
     @Override
@@ -707,4 +737,5 @@ public class Frame implements WindowListener {
     //Not Used
     @Override
     public void windowDeactivated(WindowEvent e) {}
+
 }
