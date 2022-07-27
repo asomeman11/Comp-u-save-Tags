@@ -73,7 +73,7 @@ public class SysInfo {
         if(Main.isVerbose()){System.out.println(getOS());}
         /*
         Getting CPU information and setting it to a global variable.
-        @see com.compusave.tags.Exceptions.InvalidCPUException
+        @see com.com.compusave.com.compusave.tags.Exceptions.InvalidCPUException
         @see SysInfo.getCPU();
         */
         List<Cpu> cpus = getComponents().cpus;
@@ -92,7 +92,7 @@ public class SysInfo {
 
         /*
         Getting the GPU information and setting it to a global variable.
-        @see com.compusave.tags.Exceptions.InvalidGPUException
+        @see com.com.compusave.com.compusave.tags.Exceptions.InvalidGPUException
         @see SysInfo.getGPU();
         */
         List<Gpu> gpus = getComponents().gpus;
@@ -112,7 +112,7 @@ public class SysInfo {
             System.out.println("Unable to determine GPU. Please manually add it to the tag.");
             e.printStackTrace();
         }
-
+        Frame.setUpdatingStatus(false);
     }
 
     private static void MacInfo(){

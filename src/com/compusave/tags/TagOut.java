@@ -3,8 +3,6 @@ package com.compusave.tags;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 @SuppressWarnings("unused")
 public class TagOut {
@@ -27,6 +25,7 @@ public class TagOut {
             }
             this.SysInfo = SysInfo;
             TagGenerate();
+            Frame.setUpdatingL("Tag Generated. You may now close the client.");
         }catch (IOException e) {
             e.printStackTrace();
         }

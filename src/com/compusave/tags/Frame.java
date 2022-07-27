@@ -21,7 +21,7 @@ TODO Add pro or home option for win OS
 
 /*
 The Frame class is the basic setup of the JFrame that will be used to display all information and text fields
-This will define how the user is able to interact with the tags frame and the subsequent component displayed on it.
+This will define how the user is able to interact with the com.compusave.tags frame and the subsequent component displayed on it.
 @see JFrame
 @see WindowListener
 @See JPanel
@@ -31,8 +31,9 @@ public class Frame extends JFrame implements WindowListener {
 
     public static JFrame frame;
     private static final Dimension size = new Dimension(730,550);
-    private static Panel panel;
+    private static com.compusave.tags.Panel panel;
     private static ImageIcon Icon;
+    TechFile techinfo;
 
     /*
     This is the main static call for the Frame class. This will be called by the Main class
@@ -41,6 +42,7 @@ public class Frame extends JFrame implements WindowListener {
     Frame(){
         FrameInit();
         BuildFrameSpecs();
+        techinfo = new TechFile();
         BuildFrameChecks();
         BuildFrameFeatures();
         panel.paint(panel.getGraphics());
@@ -68,15 +70,10 @@ public class Frame extends JFrame implements WindowListener {
     /*
     Building the JFrame structure and components variables.
      */
-    public static JTextField Model;
-    public static JTextField CPU;
-    public static JTextField Mem;
+    public static JTextField Model, CPU, Mem;
     private static final String[] MemTypes = {"Select","DDR","DDR2","DDR3","DDR3L","DDR4","DDR5","ECC"};
     public static JComboBox<String> MemType;
-    public static JTextField OS;
-    public static JTextField GPU;
-    public static JTextField DriveSize1;
-    public static JTextField DriveSize2;
+    public static JTextField OS, GPU, DriveSize1, DriveSize2;
     public static JComboBox<String> DriveType1;
     public static JComboBox<String> DriveType2;
     private static final String[] DriveTypes = {"Select","None","HDD","SSD","M.2","NVMe","mSata","SSHD"};
@@ -106,8 +103,15 @@ public class Frame extends JFrame implements WindowListener {
     public static JComboBox<String> lawar;
     public static JComboBox<String> parwar;
     public static JTextField Notes;
-    private static JLabel updating;
-    private static boolean Updating = true;
+    private static JLabel updatingL;
+    public static void setUpdatingL(String status){updatingL.setText(status);}
+    private static boolean UpdatingStatus = true;
+    public static boolean getUpdatingStatus(){
+        return UpdatingStatus;
+    }
+    public static void setUpdatingStatus(boolean status){
+        UpdatingStatus = status;
+    }
 
     /*
     Adding the Specs information and text fields to the JFrame.
@@ -386,10 +390,10 @@ public class Frame extends JFrame implements WindowListener {
         Notes.setVisible(true);
 
         //--------------------Status------------------
-        updating = new JLabel("Retrieving System Info. Please wait.");
-        updating.setBounds(300,475,300,Height);
-        panel.add(updating);
-        updating.setVisible(Updating);
+        updatingL = new JLabel("Retrieving System Info. Please wait.");
+        updatingL.setBounds(300,475,300,Height);
+        panel.add(updatingL);
+        updatingL.setVisible(UpdatingStatus);
 
         if(Main.isVerbose()){System.out.println("Components added to frame");}
         frame.setVisible(true);
@@ -400,28 +404,13 @@ public class Frame extends JFrame implements WindowListener {
     /*
     Defining variables for the double check boxes
      */
-    public static JCheckBox SKU;
-    public static JCheckBox HDD;
-    public static JCheckBox MEM;
-    public static JCheckBox DRI;
-    public static JCheckBox UPD;
-    public static JCheckBox FIN;
-    public static JCheckBox ACT;
-    public static JCheckBox CAP;
-    public static JCheckBox WIP;
-    public static JCheckBox BLO;
-    public static JCheckBox DVD;
-    public static JCheckBox BAT;
-    public static JCheckBox VRM;
-    public static String[] Techs = {"Tom", "Erik", "Gerry", "Dave"};
+    public static JCheckBox SKU,HDD,MEM,DRI,UPD,FIN,ACT,CAP,WIP,BLO,DVD,BAT,VRM;
     public static final JLabel TechRefL = new JLabel("Refurbing Tech:");
     public static JComboBox<String> TechRef;
-    public static JLabel TechSubL;
+    public static final JLabel TechSubL = new JLabel("Subbiting Tech: ");
     public static JComboBox<String> TechSub;
     public static final JLabel PWL = new JLabel("Password");
-    public static JButton passpull;
-    public static JButton Submit;
-    public static JButton Debug;
+    public static JButton passpull,Submit,Debug;
 
     /*
         Defining the checkboxes
@@ -502,26 +491,39 @@ public class Frame extends JFrame implements WindowListener {
         panel.add(VRM);
         VRM.setVisible(true);
 
-        //------------------Subbiting tags-----------------
+        //------------------Subbiting com.compusave.tags-----------------
 
         TechRefL.setBounds(470, 270,120,25);
         panel.add(TechRefL);
         TechRefL.setVisible(true);
 
+        String[] Techs = new String[techinfo.getTechs().length];
+        for (int x = 0; x < techinfo.getTechs().length; x++){
+            Techs[x] = techinfo.getTechs()[x][0];
+        }
         TechRef = new JComboBox<>(Techs);
         TechRef.setBounds(590,270,70,25);
         TechRef.addActionListener(e -> System.out.println(TechRef.getSelectedItem()));
         panel.add(TechRef);
         TechRef.setVisible(true);
 
+        TechSubL.setBounds(470,300,120,25);
+        panel.add(TechSubL);
 
-
-
+        TechSub = new JComboBox<>(Techs);
+        TechSub.setBounds(590,300, 70,25);
+        TechSub.addActionListener(e -> System.out.println(TechSub.getSelectedItem()));
+        panel.add(TechSub);
+        TechSub.setVisible(true);
 
         //---------------Pull Passmark scores--------------
         passpull = new JButton();
         passpull.setBounds(470,395,225,25);
         passpull.setText("Pull Passmark Scores");
+        passpull.addActionListener(e -> {
+            System.err.println("Feature not yet implimeted!");
+            updatingL.setText("Feature not yet implimeted!");
+        });
         panel.add(passpull);
 
 
@@ -530,42 +532,42 @@ public class Frame extends JFrame implements WindowListener {
         Submit.setBounds(470,425,105,30);
         Submit.setText("Submit");
         panel.add(Submit);
-        Submit.addActionListener(e -> {
-            Object[] Sysinfo = new Object[] {Model.getText(),CPU.getText(),Mem.getText() + " " + MemType.getSelectedItem(),GPU.getText(),OS.getText(),
-                    DriveSize1.getText() + " " + DriveType1.getSelectedItem(),DriveSize2.getText() + " " + DriveType2.getSelectedItem(),diskDrive1.getSelectedItem(),diskDrive2.getSelectedItem(),
-                    CPUScores.getText(),GPUScores.getText(),Battery.getText(),ScreenSize.getSelectedItem(), ScreenType.getSelectedItem(), ScreenRefRate.getSelectedItem(),
-                    Price.getText(),Condition.getSelectedItem(),lawar.getSelectedItem(),parwar.getSelectedItem(),Notes.getText()};
-            new Submit(Sysinfo);
-            updating.setText("Tag Generated. You may now close the client.");
-        });
-        Submit.setVisible(true);
+        boolean Approved = false;
 
-        //------------------------Debug----------------------
-        Debug = new JButton("Debug");
-        Debug.setBounds(590,425,105,30);
-        panel.add(Debug);
-        Debug.addActionListener(e -> System.out.println("Debug button test"));
-        Debug.setVisible(true);
-    }
+        Submit.addActionListener(e -> {
+            if (TechSub.getSelectedItem() != TechRef.getSelectedItem()) {
+                Object[] Sysinfo = new Object[]{Model.getText(), CPU.getText(), Mem.getText() + " " + MemType.getSelectedItem(), GPU.getText(), OS.getText(),
+                        DriveSize1.getText() + " " + DriveType1.getSelectedItem(), DriveSize2.getText() + " " + DriveType2.getSelectedItem(), diskDrive1.getSelectedItem(), diskDrive2.getSelectedItem(),
+                        CPUScores.getText(), GPUScores.getText(), Battery.getText(), ScreenSize.getSelectedItem(), ScreenType.getSelectedItem(), ScreenRefRate.getSelectedItem(),
+                        Price.getText(), Condition.getSelectedItem(), lawar.getSelectedItem(), parwar.getSelectedItem(), Notes.getText()};
+                new Submit(Sysinfo);
+            }else{
+                System.err.println("You cannot submit your own tag!");
+                updatingL.setText("You cannot submit your own tag!");
+            }
+        });
+
+            Submit.setVisible(true);
+
+            //------------------------Debug----------------------
+            Debug = new JButton("Debug");
+            Debug.setBounds(590,425,105,30);
+            panel.add(Debug);
+            Debug.addActionListener(e -> System.out.println("Debug button test"));
+            Debug.setVisible(true);
+        }
+
 
     //Ports
-    public JCheckBox usbtype3;
-    public JCheckBox usbtype2;
-    public JCheckBox usbtypeC;
-    public JCheckBox thunder;
-    public JCheckBox cardread;
-    public JCheckBox firewire;
-    public JCheckBox NIC;
-    public JCheckBox hdmi;
-    public JCheckBox dp;
+    public JCheckBox usbtype3,usbtype2,usbtypeC,thunder,cardread,firewire,NIC,hdmi,dp;
+
 
     //Features
-    public JCheckBox wifi;
-    public JCheckBox bluetooth;
-    //public JCheckBox smartcard; //this probably wont be a selling point so it is most likely not gonna make it to the full version.
-    public JCheckBox fingerprint;
-    public JCheckBox blkeys;
-    public JCheckBox webcam;
+    public JCheckBox wifi,bluetooth,fingerprint,blkeys,webcam;
+    //public JCheckBox smartcard; //this probably wont be a selling point so \
+    //it is most likely not gonna make it to the full version but its here if
+    //I change my mind.
+
 
 
 
@@ -642,7 +644,7 @@ public class Frame extends JFrame implements WindowListener {
     When this is called, it will pass through the os,
     CPU and GPU name as well as the amount of system memory
     @Parameters String os, String cpu, int mem, String gpu
-    @See com.compusave.tags.Sysinfo
+    @See com.com.compusave.com.compusave.tags.Sysinfo
      */
     public static void updateFrame(String os, String cpu, int mem, String gpu){
         if(Main.isVerbose()){System.out.println("System Info retrieved, updating components.");}
@@ -674,7 +676,7 @@ public class Frame extends JFrame implements WindowListener {
             System.err.println(e.getMessage());
         }
         System.out.println("Components successfully updated. Please check tag for accuracy.");
-        updating.setText("Update complete.");
+        updatingL.setText("Update complete.");
     }
 
 

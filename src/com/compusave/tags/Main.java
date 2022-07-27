@@ -1,9 +1,6 @@
 package com.compusave.tags;
 
 import com.compusave.tags.Debug.Console.Cmd;
-import com.sun.corba.se.impl.orbutil.concurrent.DebugMutex;
-
-import static com.compusave.tags.SysInfo.*;
 
 @SuppressWarnings("unused")
 public class Main {
@@ -17,6 +14,11 @@ public class Main {
     private static boolean Manual = false;
     public static boolean isManual(){return Manual;}
     public static void setManual(boolean manual){Manual = manual;}
+    private static boolean running = false;
+    public static boolean getRunning() {
+        return running;
+    }
+
 
     private static Thread CMD;
 
@@ -44,14 +46,16 @@ public class Main {
 
        CMD = new Thread(new Cmd());
        CMD.start();
+       running = true;
        new Frame();
        System.out.println("Retrieving System Info");
-       GetSysInfo();
-       Frame.updateFrame(getOS(), getCPU(), Math.round(getMemory() / 1073741824), getGPU());
+       SysInfo.GetSysInfo();
+       Frame.updateFrame(SysInfo.getOS(), SysInfo.getCPU(), Math.round(SysInfo.getMemory() / 1073741824), SysInfo.getGPU());
 
     }
 
     public static void Stop(){
+        running = false;
         System.out.println("Program Successfully closed.");
         System.exit(0);
     }

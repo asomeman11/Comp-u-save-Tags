@@ -16,7 +16,7 @@ public class Cmd implements Runnable {
     public static void cmdIN(){
         Scanner in = new Scanner(System.in);
 
-        String[] uin = in.nextLine().toString().toUpperCase().split("");
+        String[] uin = in.nextLine().toString().toUpperCase().split(" ");
         validate(uin);
 
     }
@@ -43,7 +43,7 @@ public class Cmd implements Runnable {
                     }
                     break;
                 default:
-                    System.out.println(Input[x] + "is an invalid command. I'm Dislexic, whast yoru ecxuse?");
+                    System.out.println("\"" + Input[x] + "\" is an invalid command. I'm Dislexic, whast yoru ecxuse?");
                     break;
             }
         }
@@ -51,7 +51,9 @@ public class Cmd implements Runnable {
 
     @Override
     public void run() {
-        cmdIN();
-        System.out.println("cmd run");
+        do {
+            cmdIN();
+            System.out.println("cmd run");
+        }while (Main.getRunning());
     }
 }

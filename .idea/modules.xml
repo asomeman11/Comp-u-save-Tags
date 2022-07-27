@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TagsClient2021.iml" filepath="$PROJECT_DIR$/TagsClient2021.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TagsMonitor/TagsMonitor.iml" filepath="$PROJECT_DIR$/TagsMonitor/TagsMonitor.iml" />
     </modules>
   </component>
 </project>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Users>
+    <user>
+        <name>Gerry</name>
+        <adminlvl>Admin</adminlvl>
+        <password>xxxxxx</password>
+    </user>
+    <user>
+        <name>Erik</name>
+        <adminlvl>advanced</adminlvl>
+        <password>xxxxxx</password>
+    </user>
+    <user>
+        <name>Dave</name>
+        <adminlvl>advanced</adminlvl>
+        <password>xxxxxx</password>
+    </user>
+    <user>
+        <name>Tom</name>
+        <adminlvl>advanced</adminlvl>
+        <password>xxxxxx</password>
+    </user>
+
+    <user>
+        <name>Mike</name>
+        <adminlvl>standard</adminlvl>
+        <password>654321</password>
+    </user>
+    <user>
+        <name>refub</name>
+        <adminlvl>standard</adminlvl>
+        <password>654321</password>
+    </user>
+
+</Users>
